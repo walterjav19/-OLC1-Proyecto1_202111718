@@ -1,0 +1,38 @@
+package analizadores; 
+import java_cup.runtime.*;
+
+parser code 
+{:
+    
+    public void syntax_error(Symbol s){ 
+        System.out.println("Error Sintáctico en la Línea " + (s.left) +
+        " Columna "+s.right+ ". No se esperaba este componente: " +s.value+"."); 
+    } 
+
+    
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        System.out.println("Error síntactico irrecuperable en la Línea " + 
+        (s.left)+ " Columna "+s.right+". Componente " + s.value + 
+        " no reconocido."); 
+    }  
+:} 
+
+terminal String BRAIZQ,BRADER,CADENA,DECIMAL,DOSPTO,COMA;
+
+
+non terminal inicio,instruccion,listainstrucciones;
+
+
+
+
+start with inicio; 
+
+inicio::=BRAIZQ listainstrucciones BRADER;
+
+listainstrucciones ::= listainstrucciones COMA instruccion
+                   | instruccion
+;
+
+instruccion ::= CADENA:a DOSPTO CADENA:b  {:System.out.println("Identificador: "+a.replace("\"", "")+" Cadena: "+b.replace("\"", ""));:}
+               |CADENA:a DOSPTO DECIMAL:b  {:System.out.println("Identificador: "+a.replace("\"", "")+" Cadena: "+b);:}
+;

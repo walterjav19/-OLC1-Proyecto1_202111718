@@ -4,8 +4,12 @@
  */
 package Frontend;
 
+import analizadores.LexicoJSON;
+import analizadores.SintacticoJSON;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -263,7 +267,25 @@ public class Editor extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+       SintacticoJSON pars;
+        
+        try {
+            PrintWriter escribir=new PrintWriter(new File("archivo.txt"));
+            escribir.print(jTextArea1.getText());
+            escribir.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("No se puede escribir archivo");
+        }
+
+        try {
+            LexicoJSON lex=new LexicoJSON(new FileReader("archivo.txt"));
+            pars=new SintacticoJSON(lex);
+            pars.parse();
+        } catch (Exception ex) {
+            System.out.println("Error fatal en compilación de entrada");
+            System.out.println("Causa: "+ex.getCause());
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed

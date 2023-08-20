@@ -6,6 +6,7 @@
 package analizadores;
 
 import java_cup.runtime.*;
+import java.util.HashMap;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -31,9 +32,9 @@ public class SintacticoJSON extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\006\000\002\002\004\000\002\002\005\000\002\004" +
-    "\005\000\002\004\003\000\002\003\005\000\002\003\005" +
-    "" });
+    "\000\007\000\002\002\004\000\002\002\005\000\002\004" +
+    "\005\000\002\004\003\000\002\003\003\000\002\005\005" +
+    "\000\002\005\005" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -41,14 +42,14 @@ public class SintacticoJSON extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\015\000\004\004\004\001\002\000\004\006\011\001" +
+    "\000\016\000\004\004\004\001\002\000\004\006\012\001" +
     "\002\000\004\002\006\001\002\000\004\002\001\001\002" +
-    "\000\006\005\016\011\015\001\002\000\006\005\ufffe\011" +
-    "\ufffe\001\002\000\004\010\012\001\002\000\006\006\014" +
-    "\007\013\001\002\000\006\005\ufffc\011\ufffc\001\002\000" +
-    "\006\005\ufffd\011\ufffd\001\002\000\004\006\011\001\002" +
-    "\000\004\002\000\001\002\000\006\005\uffff\011\uffff\001" +
-    "\002" });
+    "\000\006\005\017\011\016\001\002\000\006\005\ufffd\011" +
+    "\ufffd\001\002\000\006\005\ufffe\011\ufffe\001\002\000\004" +
+    "\010\013\001\002\000\006\006\015\007\014\001\002\000" +
+    "\006\005\ufffb\011\ufffb\001\002\000\006\005\ufffc\011\ufffc" +
+    "\001\002\000\004\006\012\001\002\000\004\002\000\001" +
+    "\002\000\006\005\uffff\011\uffff\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -56,11 +57,12 @@ public class SintacticoJSON extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\015\000\004\002\004\001\001\000\006\003\007\004" +
-    "\006\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\004\003\016" +
-    "\001\001\000\002\001\001\000\002\001\001" });
+    "\000\016\000\004\002\004\001\001\000\010\003\010\004" +
+    "\006\005\007\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\006\003\017\005\007\001\001\000\002\001" +
+    "\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -110,7 +112,11 @@ public class SintacticoJSON extends java_cup.runtime.lr_parser {
         System.out.println("Error síntactico irrecuperable en la Línea " + 
         (s.left)+ " Columna "+s.right+". Componente " + s.value + 
         " no reconocido."); 
-    }  
+    } 
+
+    //Tabla de Variables y Tokens
+    public HashMap<String, Object> t_variables = new HashMap<String, Object>();
+    
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -164,6 +170,9 @@ class CUP$SintacticoJSON$actions {
           case 2: // listainstrucciones ::= listainstrucciones COMA instruccion 
             {
               Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.elementAt(CUP$SintacticoJSON$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.elementAt(CUP$SintacticoJSON$top-1)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoJSON$stack.elementAt(CUP$SintacticoJSON$top-1)).value;
 
               CUP$SintacticoJSON$result = parser.getSymbolFactory().newSymbol("listainstrucciones",2, ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.elementAt(CUP$SintacticoJSON$top-2)), ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.peek()), RESULT);
             }
@@ -179,22 +188,16 @@ class CUP$SintacticoJSON$actions {
           return CUP$SintacticoJSON$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 4: // instruccion ::= CADENA DOSPTO CADENA 
+          case 4: // instruccion ::= declaracion 
             {
               Object RESULT =null;
-		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.elementAt(CUP$SintacticoJSON$top-2)).left;
-		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.elementAt(CUP$SintacticoJSON$top-2)).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoJSON$stack.elementAt(CUP$SintacticoJSON$top-2)).value;
-		int bleft = ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.peek()).left;
-		int bright = ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.peek()).right;
-		String b = (String)((java_cup.runtime.Symbol) CUP$SintacticoJSON$stack.peek()).value;
-		System.out.println("Identificador: "+a.replace("\"", "")+" Cadena: "+b.replace("\"", ""));
-              CUP$SintacticoJSON$result = parser.getSymbolFactory().newSymbol("instruccion",1, ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.elementAt(CUP$SintacticoJSON$top-2)), ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.peek()), RESULT);
+
+              CUP$SintacticoJSON$result = parser.getSymbolFactory().newSymbol("instruccion",1, ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.peek()), RESULT);
             }
           return CUP$SintacticoJSON$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 5: // instruccion ::= CADENA DOSPTO DECIMAL 
+          case 5: // declaracion ::= CADENA DOSPTO CADENA 
             {
               Object RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.elementAt(CUP$SintacticoJSON$top-2)).left;
@@ -203,8 +206,23 @@ class CUP$SintacticoJSON$actions {
 		int bleft = ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.peek()).right;
 		String b = (String)((java_cup.runtime.Symbol) CUP$SintacticoJSON$stack.peek()).value;
-		System.out.println("Identificador: "+a.replace("\"", "")+" Cadena: "+b);
-              CUP$SintacticoJSON$result = parser.getSymbolFactory().newSymbol("instruccion",1, ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.elementAt(CUP$SintacticoJSON$top-2)), ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.peek()), RESULT);
+		t_variables.put(a.replace("\"", ""),b.replace("\"", ""));
+              CUP$SintacticoJSON$result = parser.getSymbolFactory().newSymbol("declaracion",3, ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.elementAt(CUP$SintacticoJSON$top-2)), ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoJSON$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 6: // declaracion ::= CADENA DOSPTO DECIMAL 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.elementAt(CUP$SintacticoJSON$top-2)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.elementAt(CUP$SintacticoJSON$top-2)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoJSON$stack.elementAt(CUP$SintacticoJSON$top-2)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.peek()).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.peek()).right;
+		String b = (String)((java_cup.runtime.Symbol) CUP$SintacticoJSON$stack.peek()).value;
+		t_variables.put(a.replace("\"", ""),b);
+              CUP$SintacticoJSON$result = parser.getSymbolFactory().newSymbol("declaracion",3, ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.elementAt(CUP$SintacticoJSON$top-2)), ((java_cup.runtime.Symbol)CUP$SintacticoJSON$stack.peek()), RESULT);
             }
           return CUP$SintacticoJSON$result;
 

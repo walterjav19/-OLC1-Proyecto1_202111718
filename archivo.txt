@@ -1,5 +1,10 @@
+/* ejemplo de carga 
+
+   de objeto json */
+
+
 {
-	"Titulo":"titulo Pie",
+   "Titulo":"titulo Pie",
 	"variable1": 4.5,
 	"Titulo2": "titulo barras",
 	"variable2": 5.0

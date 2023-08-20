@@ -1,5 +1,8 @@
 package analizadores; 
 import java_cup.runtime.*;
+import java.util.HashMap;
+
+
 
 parser code 
 {:
@@ -14,25 +17,33 @@ parser code
         System.out.println("Error síntactico irrecuperable en la Línea " + 
         (s.left)+ " Columna "+s.right+". Componente " + s.value + 
         " no reconocido."); 
-    }  
+    } 
+
+    //Tabla de Variables y Tokens
+    public HashMap<String, Object> t_variables = new HashMap<String, Object>();
+    
 :} 
 
 terminal String BRAIZQ,BRADER,CADENA,DECIMAL,DOSPTO,COMA;
 
 
-non terminal inicio,instruccion,listainstrucciones;
+non terminal inicio,instruccion,listainstrucciones,declaracion;
 
 
 
 
 start with inicio; 
 
-inicio::=BRAIZQ listainstrucciones BRADER;
+inicio::=BRAIZQ listainstrucciones BRADER
+;
 
-listainstrucciones ::= listainstrucciones COMA instruccion
+listainstrucciones ::= listainstrucciones COMA:a instruccion
                    | instruccion
 ;
 
-instruccion ::= CADENA:a DOSPTO CADENA:b  {:System.out.println("Identificador: "+a.replace("\"", "")+" Cadena: "+b.replace("\"", ""));:}
-               |CADENA:a DOSPTO DECIMAL:b  {:System.out.println("Identificador: "+a.replace("\"", "")+" Cadena: "+b);:}
+instruccion ::= declaracion
+;
+
+declaracion ::= CADENA:a DOSPTO CADENA:b  {:t_variables.put(a.replace("\"", ""),b.replace("\"", ""));:}
+               |CADENA:a DOSPTO DECIMAL:b  {:t_variables.put(a.replace("\"", ""),b);:}
 ;

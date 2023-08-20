@@ -4,8 +4,10 @@
  */
 package Frontend;
 
+import Errores.ErrorLexico;
 import analizadores.LexicoJSON;
 import analizadores.SintacticoJSON;
+import analizadores.TokenJson;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,9 +15,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-
+import java_cup.runtime.Symbol;
 /**
  *
  * @author USUARIO
@@ -28,6 +33,88 @@ public class Editor extends javax.swing.JFrame {
     public Editor() {
         initComponents();
     }
+    
+    
+ 
+    
+    public static void ReporteErrores(List<ErrorLexico> lista,String nombre){
+        PrintWriter escribir=null;
+        if(lista.isEmpty()){
+            return;
+        }
+        
+        try {
+            String cabecera="<html>\n" +
+                    "  <head>\n" +
+                    "  </head>\n" +
+                    "  <body>\n" +
+                    "    <table border=\"7\">\n" +
+                    "      <tr>\n" +
+                    "        <th>Lexema</th>\n" +
+                    "        <th>Línea</th>\n" +
+                    "        <th>Columna</th>\n" +
+                    "        <th>Descripción</th>\n" +
+                    "      </tr>";
+            String cuerpo="";
+            for (ErrorLexico error:lista) {
+                cuerpo+="      <tr>\n" +
+                        "        <td>"+error.Lexema+"</td>\n" +
+                        "        <td>"+Integer.toString(error.Linea)+"</td>\n" +
+                        "        <td>"+Integer.toString(error.Columna)+"</td>\n" +
+                        "        <td>"+error.Descripcion+"</td>\n" +
+                        "      </tr>";
+                
+            }   String pie="    </table>\n" +
+                    "  </body>\n" +
+                    "</html>";  escribir = new PrintWriter(new File("src/main/java/ReporteErrores/ErroresLexicos_"+nombre+".html"));
+                    escribir.print(cabecera+cuerpo+pie);
+                    escribir.close();
+                JOptionPane.showMessageDialog(null, " Errores Lexicos detectados revise reportes ","Error", JOptionPane.ERROR_MESSAGE);    
+        } catch (FileNotFoundException ex) {
+            System.out.println("No se encontro la carpeta");
+        } finally {
+            escribir.close();
+        }
+        
+    }
+    
+    public static void ReporteSimbolos(List<Symbol> lista,String nombre){
+        PrintWriter escribir=null;
+        try {
+            String cabecera="<html>\n" +
+                    "  <head>\n" +
+                    "  </head>\n" +
+                    "  <body>\n" +
+                    "    <table border=\"7\">\n" +
+                    "      <tr>\n" +
+                    "        <th>Token</th>\n" +
+                    "        <th>Lexema</th>\n" +
+                    "        <th>Linea</th>\n" +
+                    "        <th>Columna</th>\n" +
+                    "      </tr>";
+            String cuerpo="";
+            for (Symbol simbolo:lista) {
+                cuerpo+="      <tr>\n" +
+                        "        <td>"+TokenJson.terminalNames[simbolo.sym]+"</td>\n" +
+                        "        <td>"+simbolo.value.toString()+"</td>\n" +
+                        "        <td>"+Integer.toString(simbolo.left)+"</td>\n" +
+                        "        <td>"+Integer.toString(simbolo.right)+"</td>\n" +
+                        "      </tr>";
+                
+            }   String pie="    </table>\n" +
+                    "  </body>\n" +
+                    "</html>";  escribir = new PrintWriter(new File("src/main/java/ReporteTokens/TablaSimbolos_"+nombre+".html"));
+                    escribir.print(cabecera+cuerpo+pie);
+                    escribir.close();
+                    
+        } catch (FileNotFoundException ex) {
+            System.out.println("No se encontro la carpeta");
+        } finally {
+            escribir.close();
+        }
+    }
+    
+    
     
     public static String leer(String path){
       File archivo = null;
@@ -85,6 +172,15 @@ public class Editor extends javax.swing.JFrame {
         }
 }
     
+    public static String removeExtension(String fileName) {
+        int lastIndex = fileName.lastIndexOf('.');
+        if (lastIndex == -1) {
+            return fileName; // Si no se encuentra un punto, no hay extensión para eliminar
+        }
+        return fileName.substring(0, lastIndex);
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -119,6 +215,7 @@ public class Editor extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        jTextArea2.setEditable(false);
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
@@ -250,8 +347,9 @@ public class Editor extends javax.swing.JFrame {
         int result = fileChooser.showOpenDialog(null);
         String Texto="";
         if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
+            selectedFile = fileChooser.getSelectedFile();
             Texto=leer(selectedFile.getAbsolutePath());
+            
         }
         jTextArea1.setText(Texto);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -268,22 +366,20 @@ public class Editor extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        SintacticoJSON pars;
-        
         try {
-            PrintWriter escribir=new PrintWriter(new File("archivo.txt"));
-            escribir.print(jTextArea1.getText());
-            escribir.close();
-        } catch (FileNotFoundException ex) {
-            System.out.println("No se puede escribir archivo");
-        }
-
-        try {
-            LexicoJSON lex=new LexicoJSON(new FileReader("archivo.txt"));
+            LexicoJSON lex=new LexicoJSON(new FileReader(selectedFile.getAbsolutePath()));
             pars=new SintacticoJSON(lex);
             pars.parse();
+            
+            //Generamos el Reporte de Errores
+            ReporteErrores(lex.ErroresLexicos,removeExtension(selectedFile.getName()));
+            //Generamos Tabla de Simbolos
+            ReporteSimbolos(lex.T_SIMBOLOS,removeExtension(selectedFile.getName()));
+            
+            
+            
         } catch (Exception ex) {
-            System.out.println("Error fatal en compilación de entrada");
-            System.out.println("Causa: "+ex.getCause());
+            JOptionPane.showMessageDialog(null, " Error "+ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed

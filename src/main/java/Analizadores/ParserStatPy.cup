@@ -1,0 +1,107 @@
+package analizadores; 
+import java_cup.runtime.*;
+import java.util.HashMap;
+import Estructuras.Variable;
+
+
+parser code 
+{:
+    
+    public void syntax_error(Symbol s){ 
+        System.out.println("Error Sintáctico en la Línea " + (s.left) +
+        " Columna "+s.right+ ". No se esperaba este componente: " +s.value+"."); 
+    } 
+
+    
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        System.out.println("Error síntactico irrecuperable en la Línea " + 
+        (s.left)+ " Columna "+s.right+". Componente " + s.value + 
+        " no reconocido."); 
+    } 
+
+    //Tabla de Variables y Tokens
+    public HashMap<String, Object> t_variables = new HashMap<String, Object>();
+    
+:} 
+
+terminal String BRAIZQ,BRADER,CADENA,DECIMAL,VOID,MAIN,PARDER,PARIZQ,IDENT,IGUAL,DEFGLOB,GRAFBAR,GRAFPI,PTOCOMA,INT,DOUBLE,STRING,ENTERO;
+terminal String NEWVAL,DOLAR,COMA;
+terminal String MAS,MENOS,POR,DIVIDIDO;
+
+
+
+non terminal inicio,instrucciones,sentencias,globales,barras,pie,listainstrucciones,listaglobales,variablesglobales;
+non terminal String expresiondecimal,expresionentero;
+non terminal variablesjson;
+
+precedence left MAS,MENOS;
+precedence left POR,DIVIDIDO;
+
+
+
+start with inicio; 
+
+inicio::= VOID MAIN PARIZQ PARDER BRAIZQ listainstrucciones BRADER
+;
+
+
+
+listainstrucciones::= listainstrucciones instrucciones
+                      |instrucciones
+;
+
+instrucciones::=sentencias
+                |globales
+                |barras
+                |pie
+;
+
+sentencias::=INT IDENT IGUAL expresionentero:exp PTOCOMA{:System.out.println(exp);:}
+            |DOUBLE IDENT IGUAL expresiondecimal:exp PTOCOMA{:System.out.println(exp);:}
+;
+
+expresiondecimal ::= expresiondecimal:a MAS expresiondecimal:b {:RESULT=a+"+"+b;:}	
+	|  expresiondecimal:a MENOS expresiondecimal:b	{:RESULT=a+"-"+b;:}	
+	|  expresiondecimal:a POR expresiondecimal:b    {:RESULT=a+"*"+b;:}
+	|  expresiondecimal:a DIVIDIDO expresiondecimal:b {:RESULT=a+"/"+b;:}		
+        |  DECIMAL:dec {:RESULT=dec;:}	
+        |  ENTERO:en {:RESULT=en;:}
+;
+
+expresionentero ::= expresionentero:a MAS expresionentero:b {:RESULT=a+"+"+b;:}	
+	|  expresionentero:a MENOS expresionentero:b	{:RESULT=a+"-"+b;:}	
+	|  expresionentero:a POR expresionentero:b    {:RESULT=a+"*"+b;:}
+	|  expresionentero:a DIVIDIDO expresionentero:b {:RESULT=a+"/"+b;:}		
+        |  ENTERO:dec {:RESULT=dec;:}	
+;
+
+
+
+globales::=VOID DEFGLOB PARIZQ PARDER BRAIZQ listaglobales BRADER{:System.out.println("global");:}
+           
+;
+
+listaglobales::=listaglobales variablesglobales
+                | variablesglobales
+;
+
+variablesglobales::=  STRING IDENT:a IGUAL CADENA:b PTOCOMA{:System.out.println(a+" "+b);:}
+                    | DOUBLE IDENT:a IGUAL DECIMAL:b PTOCOMA{:System.out.println(a+" "+b);:}
+                    | DOUBLE IDENT:a IGUAL variablesjson:b PTOCOMA{:System.out.println(b);:}
+                    | STRING IDENT:a IGUAL variablesjson:b PTOCOMA{:System.out.println(b);:}   
+;
+
+variablesjson::= DOLAR BRAIZQ NEWVAL COMA CADENA:a COMA CADENA:b BRADER{:
+Object var=Variable.BuscarVariable(a.replace("\"",""),b.replace("\"",""));
+RESULT=var;:}
+;
+
+barras::=VOID GRAFBAR PARIZQ PARDER BRAIZQ BRADER{:System.out.println("barras");:}
+         
+;
+
+pie::=VOID GRAFPI PARIZQ PARDER BRAIZQ BRADER{:System.out.println("pie");:}
+;
+
+
+

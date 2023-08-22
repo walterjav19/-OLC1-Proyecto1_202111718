@@ -7,6 +7,8 @@ package Frontend;
 import Errores.ErrorLexico;
 import analizadores.LexicoJSON;
 import analizadores.SintacticoJSON;
+import analizadores.SintacticoStatPy;
+import analizadores.LexicoStatPy;
 import analizadores.TokenJson;
 import java.io.BufferedReader;
 import java.io.File;
@@ -179,7 +181,11 @@ public class Editor extends javax.swing.JFrame {
         }
         return fileName.substring(0, lastIndex);
     }
-
+    
+    
+    public static void AnalizarJson(){
+        
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -342,6 +348,8 @@ public class Editor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     File selectedFile=null;
+    String TipoAnalizador="";
+    
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         int result = fileChooser.showOpenDialog(null);
@@ -362,25 +370,51 @@ public class Editor extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         jLabel5.setText("JSON");
+        TipoAnalizador="JSON";
+        
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       SintacticoJSON pars;
-        try {
-            LexicoJSON lex=new LexicoJSON(new FileReader(selectedFile.getAbsolutePath()));
-            pars=new SintacticoJSON(lex);
-            pars.parse();
-            
-            //Generamos el Reporte de Errores
-            ReporteErrores(lex.ErroresLexicos,removeExtension(selectedFile.getName()));
-            //Generamos Tabla de Simbolos
-            ReporteSimbolos(lex.T_SIMBOLOS,removeExtension(selectedFile.getName()));
-            
-            
-            
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, " Error "+ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+        if(TipoAnalizador=="JSON"){
+            SintacticoJSON pars;
+            try {
+                LexicoJSON lex=new LexicoJSON(new FileReader(selectedFile.getAbsolutePath()));
+                pars=new SintacticoJSON(lex);
+                pars.parse();
+
+                //Generamos el Reporte de Errores
+                ReporteErrores(lex.ErroresLexicos,removeExtension(selectedFile.getName()));
+                //Generamos Tabla de Simbolos
+                ReporteSimbolos(lex.T_SIMBOLOS,removeExtension(selectedFile.getName()));
+                //HashMap<String, HashMap<String, Object>> t_variables = new HashMap<String, HashMap<String, Object>>();
+                //Guardamos el archivo
+                String Texto=leer(selectedFile.getAbsolutePath());
+                escribir(selectedFile.getName(),Texto);
+                
+                JOptionPane.showMessageDialog(null, "Archivo Analizado","AVISO", JOptionPane.INFORMATION_MESSAGE);
+                
+                
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, " Error "+ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }else if(TipoAnalizador=="StatPy"){
+            SintacticoStatPy pars;
+            try {
+                LexicoStatPy lex=new LexicoStatPy(new FileReader(selectedFile.getAbsolutePath()));
+                pars=new SintacticoStatPy(lex);
+                pars.parse();
+                
+                JOptionPane.showMessageDialog(null, "Archivo Analizado","AVISO", JOptionPane.INFORMATION_MESSAGE);
+                
+                
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, " Error "+ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Elija que tipo de Analizador quiere usar ","AVISO", JOptionPane.INFORMATION_MESSAGE);
         }
+        
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -399,6 +433,7 @@ public class Editor extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         jLabel5.setText("StatPy");
+        TipoAnalizador="StatPy";
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**

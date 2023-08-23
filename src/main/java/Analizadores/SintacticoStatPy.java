@@ -35,7 +35,7 @@ public class SintacticoStatPy extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\064\000\002\002\004\000\002\002\011\000\002\010" +
+    "\000\111\000\002\002\004\000\002\002\011\000\002\010" +
     "\004\000\002\010\003\000\002\003\003\000\002\003\003" +
     "\000\002\003\003\000\002\003\003\000\002\004\007\000" +
     "\002\004\007\000\002\013\005\000\002\013\005\000\002" +
@@ -47,11 +47,17 @@ public class SintacticoStatPy extends java_cup.runtime.lr_parser {
     "\012\000\002\006\011\000\002\016\004\000\002\016\003" +
     "\000\002\017\007\000\002\017\007\000\002\017\007\000" +
     "\002\017\007\000\002\017\007\000\002\017\007\000\002" +
-    "\017\013\000\002\017\013\000\002\020\005\000\002\020" +
-    "\003\000\002\021\003\000\002\021\003\000\002\021\003" +
-    "\000\002\022\005\000\002\022\003\000\002\023\003\000" +
-    "\002\023\003\000\002\023\003\000\002\023\003\000\002" +
-    "\007\010" });
+    "\017\007\000\002\017\007\000\002\017\007\000\002\017" +
+    "\013\000\002\017\013\000\002\020\005\000\002\020\003" +
+    "\000\002\021\003\000\002\021\003\000\002\021\003\000" +
+    "\002\022\005\000\002\022\003\000\002\023\003\000\002" +
+    "\023\003\000\002\023\003\000\002\023\003\000\002\007" +
+    "\011\000\002\024\004\000\002\024\003\000\002\025\007" +
+    "\000\002\025\007\000\002\025\007\000\002\025\013\000" +
+    "\002\025\013\000\002\026\005\000\002\026\003\000\002" +
+    "\030\005\000\002\030\003\000\002\027\003\000\002\027" +
+    "\003\000\002\027\003\000\002\031\003\000\002\031\003" +
+    "\000\002\031\003\000\002\031\003" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -59,11 +65,11 @@ public class SintacticoStatPy extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\212\000\004\010\004\001\002\000\004\011\007\001" +
+    "\000\272\000\004\010\004\001\002\000\004\011\007\001" +
     "\002\000\004\002\006\001\002\000\004\002\001\001\002" +
     "\000\004\013\010\001\002\000\004\012\011\001\002\000" +
     "\004\004\012\001\002\000\010\010\015\022\013\023\020" +
-    "\001\002\000\004\014\200\001\002\000\012\005\176\010" +
+    "\001\002\000\004\014\260\001\002\000\012\005\256\010" +
     "\015\022\013\023\020\001\002\000\010\016\043\017\042" +
     "\020\044\001\002\000\012\005\ufffe\010\ufffe\022\ufffe\023" +
     "\ufffe\001\002\000\012\005\ufffa\010\ufffa\022\ufffa\023\ufffa" +
@@ -82,73 +88,103 @@ public class SintacticoStatPy extends java_cup.runtime.lr_parser {
     "\001\002\000\014\021\ufff4\040\ufff4\041\ufff4\042\ufff4\043" +
     "\ufff4\001\002\000\014\021\ufff6\040\ufff6\041\ufff6\042\035" +
     "\043\034\001\002\000\014\021\ufff7\040\ufff7\041\ufff7\042" +
-    "\035\043\034\001\002\000\004\013\106\001\002\000\004" +
-    "\013\051\001\002\000\004\013\045\001\002\000\004\012" +
-    "\046\001\002\000\004\004\047\001\002\000\004\005\050" +
-    "\001\002\000\012\005\uffce\010\uffce\022\uffce\023\uffce\001" +
-    "\002\000\004\012\052\001\002\000\004\004\053\001\002" +
-    "\000\006\023\054\024\055\001\002\000\004\014\100\001" +
-    "\002\000\004\014\062\001\002\000\010\005\uffea\023\uffea" +
-    "\024\uffea\001\002\000\010\005\060\023\054\024\055\001" +
+    "\035\043\034\001\002\000\004\013\160\001\002\000\004" +
+    "\013\133\001\002\000\004\013\045\001\002\000\004\012" +
+    "\046\001\002\000\004\004\047\001\002\000\006\023\050" +
+    "\024\052\001\002\000\004\031\114\001\002\000\010\005" +
+    "\uffc9\023\uffc9\024\uffc9\001\002\000\006\031\057\033\056" +
+    "\001\002\000\010\005\055\023\050\024\052\001\002\000" +
+    "\010\005\uffca\023\uffca\024\uffca\001\002\000\012\005\uffcb" +
+    "\010\uffcb\022\uffcb\023\uffcb\001\002\000\004\015\105\001" +
+    "\002\000\004\032\060\001\002\000\004\034\061\001\002" +
+    "\000\004\015\062\001\002\000\004\004\063\001\002\000" +
+    "\010\006\071\014\066\027\064\001\002\000\004\004\076" +
+    "\001\002\000\006\005\uffbd\030\uffbd\001\002\000\006\005" +
+    "\uffbe\030\uffbe\001\002\000\006\005\073\030\072\001\002" +
+    "\000\006\005\uffc2\030\uffc2\001\002\000\006\005\uffbf\030" +
+    "\uffbf\001\002\000\010\006\071\014\066\027\064\001\002" +
+    "\000\004\021\074\001\002\000\010\005\uffc5\023\uffc5\024" +
+    "\uffc5\001\002\000\006\005\uffc3\030\uffc3\001\002\000\004" +
+    "\026\077\001\002\000\004\030\100\001\002\000\004\006" +
+    "\101\001\002\000\004\030\102\001\002\000\004\006\103" +
+    "\001\002\000\004\005\104\001\002\000\010\005\uffe5\021" +
+    "\uffe5\030\uffe5\001\002\000\010\006\110\014\107\027\064" +
+    "\001\002\000\004\021\113\001\002\000\004\021\112\001" +
+    "\002\000\004\021\111\001\002\000\010\005\uffc7\023\uffc7" +
+    "\024\uffc7\001\002\000\010\005\uffc8\023\uffc8\024\uffc8\001" +
+    "\002\000\010\005\uffc6\023\uffc6\024\uffc6\001\002\000\004" +
+    "\032\115\001\002\000\004\035\116\001\002\000\004\015" +
+    "\117\001\002\000\004\004\120\001\002\000\012\007\124" +
+    "\014\122\025\126\027\064\001\002\000\006\005\uffba\030" +
+    "\uffba\001\002\000\006\005\uffbb\030\uffbb\001\002\000\006" +
+    "\005\130\030\127\001\002\000\006\005\uffbc\030\uffbc\001" +
+    "\002\000\006\005\uffc0\030\uffc0\001\002\000\006\005\uffb9" +
+    "\030\uffb9\001\002\000\012\007\124\014\122\025\126\027" +
+    "\064\001\002\000\004\021\131\001\002\000\010\005\uffc4" +
+    "\023\uffc4\024\uffc4\001\002\000\006\005\uffc1\030\uffc1\001" +
+    "\002\000\004\012\134\001\002\000\004\004\135\001\002" +
+    "\000\006\023\136\024\137\001\002\000\004\014\152\001" +
+    "\002\000\004\014\144\001\002\000\010\005\uffea\023\uffea" +
+    "\024\uffea\001\002\000\010\005\142\023\136\024\137\001" +
     "\002\000\012\005\uffec\010\uffec\022\uffec\023\uffec\001\002" +
     "\000\010\005\uffeb\023\uffeb\024\uffeb\001\002\000\004\015" +
-    "\063\001\002\000\006\006\066\027\065\001\002\000\004" +
-    "\021\077\001\002\000\004\004\070\001\002\000\004\021" +
-    "\067\001\002\000\010\005\uffe9\023\uffe9\024\uffe9\001\002" +
-    "\000\004\026\071\001\002\000\004\030\072\001\002\000" +
-    "\004\006\073\001\002\000\004\030\074\001\002\000\004" +
-    "\006\075\001\002\000\004\005\076\001\002\000\010\005" +
-    "\uffe5\021\uffe5\030\uffe5\001\002\000\010\005\uffe6\023\uffe6" +
-    "\024\uffe6\001\002\000\004\015\101\001\002\000\006\007" +
-    "\103\027\065\001\002\000\004\021\105\001\002\000\004" +
-    "\021\104\001\002\000\010\005\uffe8\023\uffe8\024\uffe8\001" +
+    "\145\001\002\000\006\006\147\027\064\001\002\000\004" +
+    "\021\151\001\002\000\004\021\150\001\002\000\010\005" +
+    "\uffe9\023\uffe9\024\uffe9\001\002\000\010\005\uffe6\023\uffe6" +
+    "\024\uffe6\001\002\000\004\015\153\001\002\000\006\007" +
+    "\155\027\064\001\002\000\004\021\157\001\002\000\004" +
+    "\021\156\001\002\000\010\005\uffe8\023\uffe8\024\uffe8\001" +
     "\002\000\010\005\uffe7\023\uffe7\024\uffe7\001\002\000\004" +
-    "\012\107\001\002\000\004\004\110\001\002\000\006\023" +
-    "\111\024\112\001\002\000\004\031\157\001\002\000\012" +
-    "\031\122\033\117\036\120\037\121\001\002\000\010\005" +
-    "\uffe2\023\uffe2\024\uffe2\001\002\000\010\005\115\023\111" +
-    "\024\112\001\002\000\012\005\uffe4\010\uffe4\022\uffe4\023" +
+    "\012\161\001\002\000\004\004\162\001\002\000\006\023" +
+    "\163\024\164\001\002\000\004\031\237\001\002\000\012" +
+    "\031\174\033\171\036\172\037\173\001\002\000\010\005" +
+    "\uffe2\023\uffe2\024\uffe2\001\002\000\010\005\167\023\163" +
+    "\024\164\001\002\000\012\005\uffe4\010\uffe4\022\uffe4\023" +
     "\uffe4\001\002\000\010\005\uffe3\023\uffe3\024\uffe3\001\002" +
-    "\000\004\015\152\001\002\000\004\015\145\001\002\000" +
-    "\004\015\140\001\002\000\004\032\123\001\002\000\004" +
-    "\034\124\001\002\000\004\015\125\001\002\000\004\004" +
-    "\126\001\002\000\010\006\133\014\131\027\065\001\002" +
-    "\000\006\005\uffd5\030\uffd5\001\002\000\006\005\135\030" +
-    "\134\001\002\000\006\005\uffd6\030\uffd6\001\002\000\006" +
-    "\005\uffd8\030\uffd8\001\002\000\006\005\uffd7\030\uffd7\001" +
-    "\002\000\010\006\133\014\131\027\065\001\002\000\004" +
-    "\021\136\001\002\000\010\005\uffdb\023\uffdb\024\uffdb\001" +
-    "\002\000\006\005\uffd9\030\uffd9\001\002\000\006\006\142" +
-    "\014\141\001\002\000\004\021\144\001\002\000\004\021" +
-    "\143\001\002\000\010\005\uffde\023\uffde\024\uffde\001\002" +
-    "\000\010\005\uffdf\023\uffdf\024\uffdf\001\002\000\006\006" +
-    "\147\014\146\001\002\000\004\021\151\001\002\000\004" +
-    "\021\150\001\002\000\010\005\uffdc\023\uffdc\024\uffdc\001" +
-    "\002\000\010\005\uffdd\023\uffdd\024\uffdd\001\002\000\006" +
-    "\006\154\014\153\001\002\000\004\021\156\001\002\000" +
-    "\004\021\155\001\002\000\010\005\uffe0\023\uffe0\024\uffe0" +
-    "\001\002\000\010\005\uffe1\023\uffe1\024\uffe1\001\002\000" +
-    "\004\032\160\001\002\000\004\035\161\001\002\000\004" +
-    "\015\162\001\002\000\004\004\163\001\002\000\012\007" +
-    "\167\014\165\025\170\027\065\001\002\000\006\005\uffd0" +
-    "\030\uffd0\001\002\000\006\005\uffd1\030\uffd1\001\002\000" +
-    "\006\005\173\030\172\001\002\000\006\005\uffd2\030\uffd2" +
-    "\001\002\000\006\005\uffcf\030\uffcf\001\002\000\006\005" +
-    "\uffd3\030\uffd3\001\002\000\012\007\167\014\165\025\170" +
-    "\027\065\001\002\000\004\021\174\001\002\000\010\005" +
-    "\uffda\023\uffda\024\uffda\001\002\000\006\005\uffd4\030\uffd4" +
-    "\001\002\000\004\002\000\001\002\000\012\005\uffff\010" +
-    "\uffff\022\uffff\023\uffff\001\002\000\004\015\201\001\002" +
-    "\000\004\025\203\001\002\000\014\021\204\040\205\041" +
-    "\207\042\210\043\206\001\002\000\014\021\uffed\040\uffed" +
-    "\041\uffed\042\uffed\043\uffed\001\002\000\012\005\ufff9\010" +
-    "\ufff9\022\ufff9\023\ufff9\001\002\000\004\025\203\001\002" +
-    "\000\004\025\203\001\002\000\004\025\203\001\002\000" +
-    "\004\025\203\001\002\000\014\021\uffef\040\uffef\041\uffef" +
-    "\042\uffef\043\uffef\001\002\000\014\021\ufff0\040\ufff0\041" +
-    "\ufff0\042\210\043\206\001\002\000\014\021\uffee\040\uffee" +
-    "\041\uffee\042\uffee\043\uffee\001\002\000\014\021\ufff1\040" +
-    "\ufff1\041\ufff1\042\210\043\206\001\002" });
+    "\000\004\015\230\001\002\000\004\015\221\001\002\000" +
+    "\004\015\212\001\002\000\004\032\175\001\002\000\004" +
+    "\034\176\001\002\000\004\015\177\001\002\000\004\004" +
+    "\200\001\002\000\010\006\205\014\203\027\064\001\002" +
+    "\000\006\005\uffd2\030\uffd2\001\002\000\006\005\207\030" +
+    "\206\001\002\000\006\005\uffd3\030\uffd3\001\002\000\006" +
+    "\005\uffd5\030\uffd5\001\002\000\006\005\uffd4\030\uffd4\001" +
+    "\002\000\010\006\205\014\203\027\064\001\002\000\004" +
+    "\021\210\001\002\000\010\005\uffd8\023\uffd8\024\uffd8\001" +
+    "\002\000\006\005\uffd6\030\uffd6\001\002\000\010\006\215" +
+    "\014\214\027\064\001\002\000\004\021\220\001\002\000" +
+    "\004\021\217\001\002\000\004\021\216\001\002\000\010" +
+    "\005\uffdd\023\uffdd\024\uffdd\001\002\000\010\005\uffde\023" +
+    "\uffde\024\uffde\001\002\000\010\005\uffdc\023\uffdc\024\uffdc" +
+    "\001\002\000\010\006\224\014\223\027\064\001\002\000" +
+    "\004\021\227\001\002\000\004\021\226\001\002\000\004" +
+    "\021\225\001\002\000\010\005\uffda\023\uffda\024\uffda\001" +
+    "\002\000\010\005\uffdb\023\uffdb\024\uffdb\001\002\000\010" +
+    "\005\uffd9\023\uffd9\024\uffd9\001\002\000\010\006\233\014" +
+    "\232\027\064\001\002\000\004\021\236\001\002\000\004" +
+    "\021\235\001\002\000\004\021\234\001\002\000\010\005" +
+    "\uffe0\023\uffe0\024\uffe0\001\002\000\010\005\uffe1\023\uffe1" +
+    "\024\uffe1\001\002\000\010\005\uffdf\023\uffdf\024\uffdf\001" +
+    "\002\000\004\032\240\001\002\000\004\035\241\001\002" +
+    "\000\004\015\242\001\002\000\004\004\243\001\002\000" +
+    "\012\007\247\014\245\025\250\027\064\001\002\000\006" +
+    "\005\uffcd\030\uffcd\001\002\000\006\005\uffce\030\uffce\001" +
+    "\002\000\006\005\253\030\252\001\002\000\006\005\uffcf" +
+    "\030\uffcf\001\002\000\006\005\uffcc\030\uffcc\001\002\000" +
+    "\006\005\uffd0\030\uffd0\001\002\000\012\007\247\014\245" +
+    "\025\250\027\064\001\002\000\004\021\254\001\002\000" +
+    "\010\005\uffd7\023\uffd7\024\uffd7\001\002\000\006\005\uffd1" +
+    "\030\uffd1\001\002\000\004\002\000\001\002\000\012\005" +
+    "\uffff\010\uffff\022\uffff\023\uffff\001\002\000\004\015\261" +
+    "\001\002\000\004\025\263\001\002\000\014\021\264\040" +
+    "\265\041\267\042\270\043\266\001\002\000\014\021\uffed" +
+    "\040\uffed\041\uffed\042\uffed\043\uffed\001\002\000\012\005" +
+    "\ufff9\010\ufff9\022\ufff9\023\ufff9\001\002\000\004\025\263" +
+    "\001\002\000\004\025\263\001\002\000\004\025\263\001" +
+    "\002\000\004\025\263\001\002\000\014\021\uffef\040\uffef" +
+    "\041\uffef\042\uffef\043\uffef\001\002\000\014\021\ufff0\040" +
+    "\ufff0\041\ufff0\042\270\043\266\001\002\000\014\021\uffee" +
+    "\040\uffee\041\uffee\042\uffee\043\uffee\001\002\000\014\021" +
+    "\ufff1\040\ufff1\041\ufff1\042\270\043\266\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -156,11 +192,11 @@ public class SintacticoStatPy extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\212\000\004\002\004\001\001\000\002\001\001\000" +
+    "\000\272\000\004\002\004\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\016\003\015\004\021\005" +
     "\020\006\022\007\016\010\013\001\001\000\002\001\001" +
-    "\000\014\003\176\004\021\005\020\006\022\007\016\001" +
+    "\000\014\003\256\004\021\005\020\006\022\007\016\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\004\013\025\001\001" +
@@ -169,42 +205,60 @@ public class SintacticoStatPy extends java_cup.runtime.lr_parser {
     "\001\001\000\004\013\036\001\001\000\004\013\035\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\006\011\056\012\055\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\004\012\060\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\004\015\063\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\004\015\101\001\001\000" +
-    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\006\016" +
-    "\113\017\112\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\004\017\115\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\010\015\126\020\127" +
-    "\021\131\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\006" +
-    "\015\126\021\136\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\024\052\025\050\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\004\025\053\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\010\015\064\026\066\027\067\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\006\015\064\027" +
+    "\074\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\004\015\105\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\010\015\163\022\165\023\170\001\001" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\010" +
+    "\015\120\030\122\031\124\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\006\015\120\031\131\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\006\011\140\012" +
+    "\137\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\004\012\142\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\004\015\145\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\004\015\153\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\006" +
-    "\015\163\023\174\001\001\000\002\001\001\000\002\001" +
+    "\016\165\017\164\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\004\017\167\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\004\014\201\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\004\014\213" +
-    "\001\001\000\004\014\212\001\001\000\004\014\211\001" +
-    "\001\000\004\014\210\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001" });
+    "\000\002\001\001\000\002\001\001\000\010\015\200\020" +
+    "\201\021\203\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\006\015\200\021\210\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\004\015\212\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\004\015" +
+    "\221\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\004\015\230\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\010\015\243\022" +
+    "\245\023\250\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\006\015\243\023\254\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\004\014\261" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\004\014\273\001\001\000\004\014\272\001\001" +
+    "\000\004\014\271\001\001\000\004\014\270\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -261,6 +315,10 @@ public class SintacticoStatPy extends java_cup.runtime.lr_parser {
     public String Titulo_Barras,TituloEjeX_Barras,TituloEjeY_Barras;
     public List<String> EjeX= new ArrayList<String>();
     public List<Double> Valores= new ArrayList<Double>();
+    
+    public String Titulo_Pie;
+    public List<String> EjeX_Pie= new ArrayList<String>();
+    public List<Double> Valores_Pie= new ArrayList<Double>();
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -700,7 +758,19 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 34: // instruccionesbarras ::= STRING TITULOX IGUAL IDENT PTOCOMA 
+          case 34: // instruccionesbarras ::= STRING TITULO IGUAL variablesjson PTOCOMA 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
+		Titulo_Barras=a.toString();
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("instruccionesbarras",13, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 35: // instruccionesbarras ::= STRING TITULOX IGUAL IDENT PTOCOMA 
             {
               Object RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
@@ -712,7 +782,7 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 35: // instruccionesbarras ::= STRING TITULOX IGUAL CADENA PTOCOMA 
+          case 36: // instruccionesbarras ::= STRING TITULOX IGUAL CADENA PTOCOMA 
             {
               Object RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
@@ -724,7 +794,19 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 36: // instruccionesbarras ::= STRING TITULOY IGUAL IDENT PTOCOMA 
+          case 37: // instruccionesbarras ::= STRING TITULOX IGUAL variablesjson PTOCOMA 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
+		TituloEjeX_Barras=a.toString();
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("instruccionesbarras",13, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 38: // instruccionesbarras ::= STRING TITULOY IGUAL IDENT PTOCOMA 
             {
               Object RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
@@ -736,7 +818,7 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 37: // instruccionesbarras ::= STRING TITULOY IGUAL CADENA PTOCOMA 
+          case 39: // instruccionesbarras ::= STRING TITULOY IGUAL CADENA PTOCOMA 
             {
               Object RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
@@ -748,7 +830,19 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 38: // instruccionesbarras ::= STRING LLAIZQ LLADER EJEX IGUAL BRAIZQ listastring BRADER PTOCOMA 
+          case 40: // instruccionesbarras ::= STRING TITULOY IGUAL variablesjson PTOCOMA 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
+		TituloEjeY_Barras=a.toString();
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("instruccionesbarras",13, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 41: // instruccionesbarras ::= STRING LLAIZQ LLADER EJEX IGUAL BRAIZQ listastring BRADER PTOCOMA 
             {
               Object RESULT =null;
 
@@ -757,7 +851,7 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 39: // instruccionesbarras ::= DOUBLE LLAIZQ LLADER VALORES IGUAL BRAIZQ listadouble BRADER PTOCOMA 
+          case 42: // instruccionesbarras ::= DOUBLE LLAIZQ LLADER VALORES IGUAL BRAIZQ listadouble BRADER PTOCOMA 
             {
               Object RESULT =null;
 
@@ -766,7 +860,7 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 40: // listastring ::= listastring COMA arreglostring 
+          case 43: // listastring ::= listastring COMA arreglostring 
             {
               Object RESULT =null;
 
@@ -775,7 +869,7 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 41: // listastring ::= arreglostring 
+          case 44: // listastring ::= arreglostring 
             {
               Object RESULT =null;
 
@@ -784,7 +878,7 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 42: // arreglostring ::= CADENA 
+          case 45: // arreglostring ::= CADENA 
             {
               Object RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
@@ -796,7 +890,7 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 43: // arreglostring ::= IDENT 
+          case 46: // arreglostring ::= IDENT 
             {
               Object RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
@@ -808,7 +902,7 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 44: // arreglostring ::= variablesjson 
+          case 47: // arreglostring ::= variablesjson 
             {
               Object RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
@@ -820,7 +914,7 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 45: // listadouble ::= listadouble COMA arreglodouble 
+          case 48: // listadouble ::= listadouble COMA arreglodouble 
             {
               Object RESULT =null;
 
@@ -829,7 +923,7 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 46: // listadouble ::= arreglodouble 
+          case 49: // listadouble ::= arreglodouble 
             {
               Object RESULT =null;
 
@@ -838,7 +932,7 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 47: // arreglodouble ::= DECIMAL 
+          case 50: // arreglodouble ::= DECIMAL 
             {
               Object RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
@@ -850,7 +944,7 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 48: // arreglodouble ::= IDENT 
+          case 51: // arreglodouble ::= IDENT 
             {
               Object RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
@@ -863,7 +957,7 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 49: // arreglodouble ::= variablesjson 
+          case 52: // arreglodouble ::= variablesjson 
             {
               Object RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
@@ -876,7 +970,7 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 50: // arreglodouble ::= ENTERO 
+          case 53: // arreglodouble ::= ENTERO 
             {
               Object RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
@@ -888,11 +982,205 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 51: // pie ::= VOID GRAFPI PARIZQ PARDER BRAIZQ BRADER 
+          case 54: // pie ::= VOID GRAFPI PARIZQ PARDER BRAIZQ listapie BRADER 
             {
               Object RESULT =null;
 		System.out.println("pie");
-              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("pie",5, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-5)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("pie",5, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-6)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 55: // listapie ::= listapie instruccionespie 
+            {
+              Object RESULT =null;
+
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("listapie",18, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 56: // listapie ::= instruccionespie 
+            {
+              Object RESULT =null;
+
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("listapie",18, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 57: // instruccionespie ::= STRING TITULO IGUAL IDENT PTOCOMA 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
+		Titulo_Pie=t_variables.get(a).toString();
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("instruccionespie",19, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 58: // instruccionespie ::= STRING TITULO IGUAL CADENA PTOCOMA 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
+		Titulo_Pie=a.replace("\"","");
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("instruccionespie",19, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 59: // instruccionespie ::= STRING TITULO IGUAL variablesjson PTOCOMA 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
+		Titulo_Pie=a.toString();
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("instruccionespie",19, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 60: // instruccionespie ::= STRING LLAIZQ LLADER EJEX IGUAL BRAIZQ listastringpie BRADER PTOCOMA 
+            {
+              Object RESULT =null;
+
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("instruccionespie",19, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-8)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 61: // instruccionespie ::= DOUBLE LLAIZQ LLADER VALORES IGUAL BRAIZQ listadoublepie BRADER PTOCOMA 
+            {
+              Object RESULT =null;
+
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("instruccionespie",19, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-8)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 62: // listastringpie ::= listastringpie COMA arreglostringpie 
+            {
+              Object RESULT =null;
+
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("listastringpie",20, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-2)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 63: // listastringpie ::= arreglostringpie 
+            {
+              Object RESULT =null;
+
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("listastringpie",20, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 64: // listadoublepie ::= listadoublepie COMA arreglodoublepie 
+            {
+              Object RESULT =null;
+
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("listadoublepie",22, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-2)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 65: // listadoublepie ::= arreglodoublepie 
+            {
+              Object RESULT =null;
+
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("listadoublepie",22, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 66: // arreglostringpie ::= CADENA 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
+		EjeX_Pie.add(a.replace("\"",""));
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("arreglostringpie",21, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 67: // arreglostringpie ::= IDENT 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
+		EjeX_Pie.add(t_variables.get(a).toString());
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("arreglostringpie",21, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 68: // arreglostringpie ::= variablesjson 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
+		EjeX_Pie.add(a.toString());
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("arreglostringpie",21, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 69: // arreglodoublepie ::= DECIMAL 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
+		Valores_Pie.add(Double.parseDouble(a));
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("arreglodoublepie",23, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 70: // arreglodoublepie ::= IDENT 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
+		String numero=t_variables.get(a).toString();
+                          Valores_Pie.add(Double.parseDouble(numero));
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("arreglodoublepie",23, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 71: // arreglodoublepie ::= variablesjson 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
+		String numero=a.toString();
+                                  Valores_Pie.add(Double.parseDouble(numero));
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("arreglodoublepie",23, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 72: // arreglodoublepie ::= ENTERO 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
+		Valores_Pie.add(Double.parseDouble(a));
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("arreglodoublepie",23, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatPy$result;
 

@@ -10,6 +10,7 @@ import analizadores.SintacticoJSON;
 import analizadores.SintacticoStatPy;
 import analizadores.LexicoStatPy;
 import analizadores.TokenJson;
+import analizadores.sym;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.BufferedReader;
@@ -31,6 +32,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 /**
  *
  * @author USUARIO
@@ -124,7 +126,42 @@ public class Editor extends javax.swing.JFrame {
         }
     }
     
-    
+        public static void ReporteSimbolos_Stat(List<Symbol> lista,String nombre){
+        PrintWriter escribir=null;
+        try {
+            String cabecera="<html>\n" +
+                    "  <head>\n" +
+                    "  </head>\n" +
+                    "  <body>\n" +
+                    "    <table border=\"7\">\n" +
+                    "      <tr>\n" +
+                    "        <th>Token</th>\n" +
+                    "        <th>Lexema</th>\n" +
+                    "        <th>Linea</th>\n" +
+                    "        <th>Columna</th>\n" +
+                    "      </tr>";
+            String cuerpo="";
+            for (Symbol simbolo:lista) {
+                cuerpo+="      <tr>\n" +
+                        "        <td>"+sym.terminalNames[simbolo.sym]+"</td>\n" +
+                        "        <td>"+simbolo.value.toString()+"</td>\n" +
+                        "        <td>"+Integer.toString(simbolo.left)+"</td>\n" +
+                        "        <td>"+Integer.toString(simbolo.right)+"</td>\n" +
+                        "      </tr>";
+                
+            }   String pie="    </table>\n" +
+                    "  </body>\n" +
+                    "</html>";  
+                    escribir = new PrintWriter(new File("src/main/java/ReporteTokens/TablaSimbolos_"+nombre+".html"));
+                    escribir.print(cabecera+cuerpo+pie);
+                    escribir.close();
+                    
+        } catch (FileNotFoundException ex) {
+            System.out.println("No se encontro la carpeta");
+        } finally {
+            escribir.close();
+        }
+    }
     
     public static String leer(String path){
       File archivo = null;
@@ -377,6 +414,9 @@ public class Editor extends javax.swing.JFrame {
     File selectedFile=null;
     String TipoAnalizador="";
     String Titulo_Barras,TituloEjeX_Barras,TituloEjeY_Barras;
+    String Titulo_Pie;
+    List<String> EjeX_Pie= new ArrayList<String>();
+    List<Double> Valores_Pie= new ArrayList<Double>();
     List<String> EjeX= new ArrayList<String>();
     List<Double> Valores= new ArrayList<Double>();
     
@@ -433,11 +473,22 @@ public class Editor extends javax.swing.JFrame {
                 LexicoStatPy lex=new LexicoStatPy(new FileReader(selectedFile.getAbsolutePath()));
                 pars=new SintacticoStatPy(lex);
                 pars.parse();
+                //datos para mis graficas de barras
                 Titulo_Barras=pars.Titulo_Barras;
                 TituloEjeX_Barras=pars.TituloEjeX_Barras;
                 TituloEjeY_Barras=pars.TituloEjeY_Barras;
                 EjeX=pars.EjeX;
                 Valores=pars.Valores;
+                //datos para el pastel
+                Titulo_Pie=pars.Titulo_Pie;
+                EjeX_Pie=pars.EjeX_Pie;
+                Valores_Pie=pars.Valores_Pie;
+                
+                //Generamos el Reporte de Errores
+                ReporteErrores(lex.ErroresLexicos,removeExtension(selectedFile.getName()));
+                //Generamos Tabla de Simbolos
+                ReporteSimbolos_Stat(lex.T_SIMBOLOS,removeExtension(selectedFile.getName()));
+                
                 JOptionPane.showMessageDialog(null, "Archivo Analizado","AVISO", JOptionPane.INFORMATION_MESSAGE);
                 
                 
@@ -471,7 +522,30 @@ public class Editor extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
+        Ventana_Pie a=new Ventana_Pie();
+        a.setVisible(true);
+        
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        for (int i = 0; i < Valores_Pie.size(); i++) {
+            dataset.setValue(EjeX_Pie.get(i), Valores_Pie.get(i));
+        }
+        
+        
+        JFreeChart chart = ChartFactory.createPieChart(
+                Titulo_Pie,
+                dataset,
+                true,
+                true,
+                false
+        );
+        
+        ChartPanel panel=new ChartPanel(chart);
+        panel.setMouseWheelEnabled(true);
+        panel.setPreferredSize(new Dimension(700,300));
+        
+        Ventana_Pie.jPanel1.setLayout(new BorderLayout());
+        Ventana_Pie.jPanel1.add(panel,BorderLayout.NORTH);
+        
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -482,7 +556,7 @@ public class Editor extends javax.swing.JFrame {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
         for (int i = 0; i < Valores.size(); i++) {
-            dataset.addValue(Valores.get(i), TituloEjeX_Barras, EjeX.get(i));
+            dataset.addValue(Valores.get(i), "Atributo", EjeX.get(i));
         }
         
         

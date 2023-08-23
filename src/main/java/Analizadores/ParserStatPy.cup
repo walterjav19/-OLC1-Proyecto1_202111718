@@ -25,6 +25,10 @@ parser code
     public String Titulo_Barras,TituloEjeX_Barras,TituloEjeY_Barras;
     public List<String> EjeX= new ArrayList<String>();
     public List<Double> Valores= new ArrayList<Double>();
+    
+    public String Titulo_Pie;
+    public List<String> EjeX_Pie= new ArrayList<String>();
+    public List<Double> Valores_Pie= new ArrayList<Double>();
 :} 
 
 terminal String BRAIZQ,BRADER,CADENA,DECIMAL,VOID,MAIN,PARDER,PARIZQ,IDENT,IGUAL,DEFGLOB,GRAFBAR,GRAFPI,PTOCOMA,INT,DOUBLE,STRING,ENTERO;
@@ -36,7 +40,7 @@ terminal String MAS,MENOS,POR,DIVIDIDO;
 non terminal inicio,instrucciones,sentencias,globales,barras,pie,listainstrucciones,listaglobales,variablesglobales;
 non terminal String expresiondecimal,expresionentero;
 non terminal variablesjson,listabarras,instruccionesbarras,listastring,arreglostring,listadouble,arreglodouble;
-
+nonterminal  listapie,instruccionespie,listastringpie,arreglostringpie,listadoublepie,arreglodoublepie;
 
 
 precedence left MAS,MENOS;
@@ -109,12 +113,15 @@ listabarras::=listabarras instruccionesbarras
             | instruccionesbarras
 ;
 
-instruccionesbarras::=STRING TITULO IGUAL IDENT:a PTOCOMA{:Titulo_Barras=t_variables.get(a).toString();:}
-                     |STRING TITULO IGUAL CADENA:a PTOCOMA{:Titulo_Barras=a.replace("\"","");:}
+instruccionesbarras::=STRING TITULO  IGUAL IDENT:a PTOCOMA{:Titulo_Barras=t_variables.get(a).toString();:}
+                     |STRING TITULO  IGUAL CADENA:a PTOCOMA{:Titulo_Barras=a.replace("\"","");:}
+                     |STRING TITULO  IGUAL variablesjson:a PTOCOMA{:Titulo_Barras=a.toString();:}
                      |STRING TITULOX IGUAL IDENT:a PTOCOMA{:TituloEjeX_Barras=t_variables.get(a).toString();:}
                      |STRING TITULOX IGUAL CADENA:a PTOCOMA{:TituloEjeX_Barras=a.replace("\"","");:}
+                     |STRING TITULOX IGUAL variablesjson:a PTOCOMA{:TituloEjeX_Barras=a.toString();:}
                      |STRING TITULOY IGUAL IDENT:a PTOCOMA{:TituloEjeY_Barras=t_variables.get(a).toString();:}
                      |STRING TITULOY IGUAL CADENA:a PTOCOMA{:TituloEjeY_Barras=a.replace("\"","");:}
+                     |STRING TITULOY IGUAL variablesjson:a PTOCOMA{:TituloEjeY_Barras=a.toString();:}
                      |STRING LLAIZQ LLADER EJEX IGUAL BRAIZQ listastring BRADER PTOCOMA
                      |DOUBLE LLAIZQ LLADER VALORES IGUAL BRAIZQ listadouble BRADER PTOCOMA  
 ;
@@ -141,8 +148,39 @@ arreglodouble ::=DECIMAL:a{:Valores.add(Double.parseDouble(a));:}
                 |ENTERO:a{:Valores.add(Double.parseDouble(a));:}
 ;
 
-pie::=VOID GRAFPI PARIZQ PARDER BRAIZQ BRADER{:System.out.println("pie");:}
+pie::=VOID GRAFPI PARIZQ PARDER BRAIZQ listapie BRADER{:System.out.println("pie");:}
 ;
 
 
+listapie::=listapie instruccionespie
+          |instruccionespie
+;
 
+instruccionespie::=STRING TITULO  IGUAL IDENT:a PTOCOMA{:Titulo_Pie=t_variables.get(a).toString();:}
+                     |STRING TITULO  IGUAL CADENA:a PTOCOMA{:Titulo_Pie=a.replace("\"","");:}
+                     |STRING TITULO  IGUAL variablesjson:a PTOCOMA{:Titulo_Pie=a.toString();:}
+                     |STRING LLAIZQ LLADER EJEX IGUAL BRAIZQ listastringpie BRADER PTOCOMA
+                     |DOUBLE LLAIZQ LLADER VALORES IGUAL BRAIZQ listadoublepie BRADER PTOCOMA
+;
+
+
+listastringpie::=listastringpie COMA arreglostringpie
+                 |arreglostringpie
+;
+
+listadoublepie::=listadoublepie COMA arreglodoublepie
+                 |arreglodoublepie
+;
+
+
+arreglostringpie::=CADENA:a{:EjeX_Pie.add(a.replace("\"",""));:}
+                |IDENT:a{:EjeX_Pie.add(t_variables.get(a).toString());:}
+                |variablesjson:a{:EjeX_Pie.add(a.toString());:}
+;
+arreglodoublepie::=DECIMAL:a{:Valores_Pie.add(Double.parseDouble(a));:}
+                |IDENT:a{:String numero=t_variables.get(a).toString();
+                          Valores_Pie.add(Double.parseDouble(numero));:}
+                |variablesjson:a{:String numero=a.toString();
+                                  Valores_Pie.add(Double.parseDouble(numero));:}
+                |ENTERO:a{:Valores_Pie.add(Double.parseDouble(a));:}
+;

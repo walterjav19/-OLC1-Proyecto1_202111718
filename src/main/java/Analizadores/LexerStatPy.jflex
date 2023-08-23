@@ -68,6 +68,21 @@ entero=[0-9]+
 "NewValor"   {T_SIMBOLOS.add(new Symbol(sym.NEWVAL,yyline,yychar, yytext()));
               return new Symbol(sym.NEWVAL,yyline,yychar, yytext());}
 
+"Titulo"   {T_SIMBOLOS.add(new Symbol(sym.TITULO,yyline,yychar, yytext()));
+              return new Symbol(sym.TITULO,yyline,yychar, yytext());}
+
+"EjeX"   {T_SIMBOLOS.add(new Symbol(sym.EJEX,yyline,yychar, yytext()));
+              return new Symbol(sym.EJEX,yyline,yychar, yytext());}
+
+"Valores"   {T_SIMBOLOS.add(new Symbol(sym.VALORES,yyline,yychar, yytext()));
+              return new Symbol(sym.VALORES,yyline,yychar, yytext());}
+
+"TituloY"   {T_SIMBOLOS.add(new Symbol(sym.TITULOY,yyline,yychar, yytext()));
+              return new Symbol(sym.TITULOY,yyline,yychar, yytext());}
+
+"TituloX"   {T_SIMBOLOS.add(new Symbol(sym.TITULOX,yyline,yychar, yytext()));
+              return new Symbol(sym.TITULOX,yyline,yychar, yytext());}
+
 "+" {T_SIMBOLOS.add(new Symbol(sym.MAS,yyline,yychar, yytext()));
         return new Symbol(sym.MAS,yyline,yychar, yytext());}
 
@@ -92,6 +107,14 @@ entero=[0-9]+
 
 "}" {T_SIMBOLOS.add(new Symbol(sym.BRADER,yyline,yychar, yytext()));
      return new Symbol(sym.BRADER,yyline,yychar, yytext());}
+
+"[" {T_SIMBOLOS.add(new Symbol(sym.LLAIZQ,yyline,yychar, yytext()));
+    return new Symbol(sym.LLAIZQ,yyline,yychar, yytext());}
+
+
+"]" {T_SIMBOLOS.add(new Symbol(sym.LLADER,yyline,yychar, yytext()));
+     return new Symbol(sym.LLADER,yyline,yychar, yytext());}
+
 
 ";" {T_SIMBOLOS.add(new Symbol(sym.PTOCOMA,yyline,yychar, yytext()));
      return new Symbol(sym.PTOCOMA,yyline,yychar, yytext());}

@@ -2,7 +2,8 @@ package analizadores;
 import java_cup.runtime.*;
 import java.util.HashMap;
 import Estructuras.Variable;
-
+import java.util.ArrayList;
+import java.util.List;
 
 parser code 
 {:
@@ -21,18 +22,22 @@ parser code
 
     //Tabla de Variables y Tokens
     public HashMap<String, Object> t_variables = new HashMap<String, Object>();
-    
+    public String Titulo_Barras,TituloEjeX_Barras,TituloEjeY_Barras;
+    public List<String> EjeX= new ArrayList<String>();
+    public List<Double> Valores= new ArrayList<Double>();
 :} 
 
 terminal String BRAIZQ,BRADER,CADENA,DECIMAL,VOID,MAIN,PARDER,PARIZQ,IDENT,IGUAL,DEFGLOB,GRAFBAR,GRAFPI,PTOCOMA,INT,DOUBLE,STRING,ENTERO;
-terminal String NEWVAL,DOLAR,COMA;
+terminal String NEWVAL,DOLAR,COMA,LLAIZQ,LLADER,TITULO,EJEX,VALORES,TITULOY,TITULOX;
 terminal String MAS,MENOS,POR,DIVIDIDO;
 
 
 
 non terminal inicio,instrucciones,sentencias,globales,barras,pie,listainstrucciones,listaglobales,variablesglobales;
 non terminal String expresiondecimal,expresionentero;
-non terminal variablesjson;
+non terminal variablesjson,listabarras,instruccionesbarras,listastring,arreglostring,listadouble,arreglodouble;
+
+
 
 precedence left MAS,MENOS;
 precedence left POR,DIVIDIDO;
@@ -77,7 +82,7 @@ expresionentero ::= expresionentero:a MAS expresionentero:b {:RESULT=a+"+"+b;:}
 
 
 
-globales::=VOID DEFGLOB PARIZQ PARDER BRAIZQ listaglobales BRADER{:System.out.println("global");:}
+globales::=VOID DEFGLOB PARIZQ PARDER BRAIZQ listaglobales BRADER{::}
            
 ;
 
@@ -85,10 +90,10 @@ listaglobales::=listaglobales variablesglobales
                 | variablesglobales
 ;
 
-variablesglobales::=  STRING IDENT:a IGUAL CADENA:b PTOCOMA{:System.out.println(a+" "+b);:}
-                    | DOUBLE IDENT:a IGUAL DECIMAL:b PTOCOMA{:System.out.println(a+" "+b);:}
-                    | DOUBLE IDENT:a IGUAL variablesjson:b PTOCOMA{:System.out.println(b);:}
-                    | STRING IDENT:a IGUAL variablesjson:b PTOCOMA{:System.out.println(b);:}   
+variablesglobales::=  STRING IDENT:a IGUAL CADENA:b PTOCOMA{:t_variables.put(a,b.replace("\"",""));:}
+                    | DOUBLE IDENT:a IGUAL DECIMAL:b PTOCOMA{:t_variables.put(a,b);:}
+                    | DOUBLE IDENT:a IGUAL variablesjson:b PTOCOMA{:t_variables.put(a,b);:}
+                    | STRING IDENT:a IGUAL variablesjson:b PTOCOMA{:t_variables.put(a,b);:}   
 ;
 
 variablesjson::= DOLAR BRAIZQ NEWVAL COMA CADENA:a COMA CADENA:b BRADER{:
@@ -96,8 +101,44 @@ Object var=Variable.BuscarVariable(a.replace("\"",""),b.replace("\"",""));
 RESULT=var;:}
 ;
 
-barras::=VOID GRAFBAR PARIZQ PARDER BRAIZQ BRADER{:System.out.println("barras");:}
+barras::=VOID GRAFBAR PARIZQ PARDER BRAIZQ listabarras BRADER{:System.out.println("barras");:}
          
+;
+
+listabarras::=listabarras instruccionesbarras
+            | instruccionesbarras
+;
+
+instruccionesbarras::=STRING TITULO IGUAL IDENT:a PTOCOMA{:Titulo_Barras=t_variables.get(a).toString();:}
+                     |STRING TITULO IGUAL CADENA:a PTOCOMA{:Titulo_Barras=a.replace("\"","");:}
+                     |STRING TITULOX IGUAL IDENT:a PTOCOMA{:TituloEjeX_Barras=t_variables.get(a).toString();:}
+                     |STRING TITULOX IGUAL CADENA:a PTOCOMA{:TituloEjeX_Barras=a.replace("\"","");:}
+                     |STRING TITULOY IGUAL IDENT:a PTOCOMA{:TituloEjeY_Barras=t_variables.get(a).toString();:}
+                     |STRING TITULOY IGUAL CADENA:a PTOCOMA{:TituloEjeY_Barras=a.replace("\"","");:}
+                     |STRING LLAIZQ LLADER EJEX IGUAL BRAIZQ listastring BRADER PTOCOMA
+                     |DOUBLE LLAIZQ LLADER VALORES IGUAL BRAIZQ listadouble BRADER PTOCOMA  
+;
+
+
+listastring::=listastring COMA arreglostring
+               |arreglostring
+;
+
+arreglostring ::=CADENA:a{:EjeX.add(a.replace("\"",""));:}
+                |IDENT:a{:EjeX.add(t_variables.get(a).toString());:}
+                |variablesjson:a{:EjeX.add(a.toString());:}
+;
+
+listadouble::=listadouble COMA arreglodouble
+              |arreglodouble
+;
+
+arreglodouble ::=DECIMAL:a{:Valores.add(Double.parseDouble(a));:}
+                |IDENT:a{:String numero=t_variables.get(a).toString();
+                          Valores.add(Double.parseDouble(numero));:}
+                |variablesjson:a{:String numero=a.toString();
+                                  Valores.add(Double.parseDouble(numero));:}
+                |ENTERO:a{:Valores.add(Double.parseDouble(a));:}
 ;
 
 pie::=VOID GRAFPI PARIZQ PARDER BRAIZQ BRADER{:System.out.println("pie");:}

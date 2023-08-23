@@ -8,6 +8,8 @@ package analizadores;
 import java_cup.runtime.*;
 import java.util.HashMap;
 import Estructuras.Variable;
+import java.util.ArrayList;
+import java.util.List;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -33,7 +35,7 @@ public class SintacticoStatPy extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\037\000\002\002\004\000\002\002\011\000\002\010" +
+    "\000\064\000\002\002\004\000\002\002\011\000\002\010" +
     "\004\000\002\010\003\000\002\003\003\000\002\003\003" +
     "\000\002\003\003\000\002\003\003\000\002\004\007\000" +
     "\002\004\007\000\002\013\005\000\002\013\005\000\002" +
@@ -42,7 +44,14 @@ public class SintacticoStatPy extends java_cup.runtime.lr_parser {
     "\000\002\014\005\000\002\014\003\000\002\005\011\000" +
     "\002\011\004\000\002\011\003\000\002\012\007\000\002" +
     "\012\007\000\002\012\007\000\002\012\007\000\002\015" +
-    "\012\000\002\006\010\000\002\007\010" });
+    "\012\000\002\006\011\000\002\016\004\000\002\016\003" +
+    "\000\002\017\007\000\002\017\007\000\002\017\007\000" +
+    "\002\017\007\000\002\017\007\000\002\017\007\000\002" +
+    "\017\013\000\002\017\013\000\002\020\005\000\002\020" +
+    "\003\000\002\021\003\000\002\021\003\000\002\021\003" +
+    "\000\002\022\005\000\002\022\003\000\002\023\003\000" +
+    "\002\023\003\000\002\023\003\000\002\023\003\000\002" +
+    "\007\010" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -50,11 +59,11 @@ public class SintacticoStatPy extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\126\000\004\010\004\001\002\000\004\011\007\001" +
+    "\000\212\000\004\010\004\001\002\000\004\011\007\001" +
     "\002\000\004\002\006\001\002\000\004\002\001\001\002" +
     "\000\004\013\010\001\002\000\004\012\011\001\002\000" +
     "\004\004\012\001\002\000\010\010\015\022\013\023\020" +
-    "\001\002\000\004\014\114\001\002\000\012\005\112\010" +
+    "\001\002\000\004\014\200\001\002\000\012\005\176\010" +
     "\015\022\013\023\020\001\002\000\010\016\043\017\042" +
     "\020\044\001\002\000\012\005\ufffe\010\ufffe\022\ufffe\023" +
     "\ufffe\001\002\000\012\005\ufffa\010\ufffa\022\ufffa\023\ufffa" +
@@ -62,21 +71,21 @@ public class SintacticoStatPy extends java_cup.runtime.lr_parser {
     "\ufffc\022\ufffc\023\ufffc\001\002\000\012\005\ufffd\010\ufffd" +
     "\022\ufffd\023\ufffd\001\002\000\012\005\ufffb\010\ufffb\022" +
     "\ufffb\023\ufffb\001\002\000\004\015\025\001\002\000\006" +
-    "\007\027\025\030\001\002\000\014\021\031\031\032\032" +
-    "\033\033\035\034\034\001\002\000\014\021\ufff3\031\ufff3" +
-    "\032\ufff3\033\ufff3\034\ufff3\001\002\000\014\021\ufff2\031" +
-    "\ufff2\032\ufff2\033\ufff2\034\ufff2\001\002\000\012\005\ufff8" +
+    "\007\027\025\030\001\002\000\014\021\031\040\032\041" +
+    "\033\042\035\043\034\001\002\000\014\021\ufff3\040\ufff3" +
+    "\041\ufff3\042\ufff3\043\ufff3\001\002\000\014\021\ufff2\040" +
+    "\ufff2\041\ufff2\042\ufff2\043\ufff2\001\002\000\012\005\ufff8" +
     "\010\ufff8\022\ufff8\023\ufff8\001\002\000\006\007\027\025" +
     "\030\001\002\000\006\007\027\025\030\001\002\000\006" +
     "\007\027\025\030\001\002\000\006\007\027\025\030\001" +
-    "\002\000\014\021\ufff5\031\ufff5\032\ufff5\033\ufff5\034\ufff5" +
-    "\001\002\000\014\021\ufff4\031\ufff4\032\ufff4\033\ufff4\034" +
-    "\ufff4\001\002\000\014\021\ufff6\031\ufff6\032\ufff6\033\035" +
-    "\034\034\001\002\000\014\021\ufff7\031\ufff7\032\ufff7\033" +
-    "\035\034\034\001\002\000\004\013\106\001\002\000\004" +
+    "\002\000\014\021\ufff5\040\ufff5\041\ufff5\042\ufff5\043\ufff5" +
+    "\001\002\000\014\021\ufff4\040\ufff4\041\ufff4\042\ufff4\043" +
+    "\ufff4\001\002\000\014\021\ufff6\040\ufff6\041\ufff6\042\035" +
+    "\043\034\001\002\000\014\021\ufff7\040\ufff7\041\ufff7\042" +
+    "\035\043\034\001\002\000\004\013\106\001\002\000\004" +
     "\013\051\001\002\000\004\013\045\001\002\000\004\012" +
     "\046\001\002\000\004\004\047\001\002\000\004\005\050" +
-    "\001\002\000\012\005\uffe3\010\uffe3\022\uffe3\023\uffe3\001" +
+    "\001\002\000\012\005\uffce\010\uffce\022\uffce\023\uffce\001" +
     "\002\000\004\012\052\001\002\000\004\004\053\001\002" +
     "\000\006\023\054\024\055\001\002\000\004\014\100\001" +
     "\002\000\004\014\062\001\002\000\010\005\uffea\023\uffea" +
@@ -88,26 +97,58 @@ public class SintacticoStatPy extends java_cup.runtime.lr_parser {
     "\067\001\002\000\010\005\uffe9\023\uffe9\024\uffe9\001\002" +
     "\000\004\026\071\001\002\000\004\030\072\001\002\000" +
     "\004\006\073\001\002\000\004\030\074\001\002\000\004" +
-    "\006\075\001\002\000\004\005\076\001\002\000\004\021" +
-    "\uffe5\001\002\000\010\005\uffe6\023\uffe6\024\uffe6\001\002" +
-    "\000\004\015\101\001\002\000\006\007\103\027\065\001" +
-    "\002\000\004\021\105\001\002\000\004\021\104\001\002" +
-    "\000\010\005\uffe8\023\uffe8\024\uffe8\001\002\000\010\005" +
-    "\uffe7\023\uffe7\024\uffe7\001\002\000\004\012\107\001\002" +
-    "\000\004\004\110\001\002\000\004\005\111\001\002\000" +
-    "\012\005\uffe4\010\uffe4\022\uffe4\023\uffe4\001\002\000\004" +
-    "\002\000\001\002\000\012\005\uffff\010\uffff\022\uffff\023" +
-    "\uffff\001\002\000\004\015\115\001\002\000\004\025\117" +
-    "\001\002\000\014\021\120\031\121\032\123\033\124\034" +
-    "\122\001\002\000\014\021\uffed\031\uffed\032\uffed\033\uffed" +
-    "\034\uffed\001\002\000\012\005\ufff9\010\ufff9\022\ufff9\023" +
-    "\ufff9\001\002\000\004\025\117\001\002\000\004\025\117" +
-    "\001\002\000\004\025\117\001\002\000\004\025\117\001" +
-    "\002\000\014\021\uffef\031\uffef\032\uffef\033\uffef\034\uffef" +
-    "\001\002\000\014\021\ufff0\031\ufff0\032\ufff0\033\124\034" +
-    "\122\001\002\000\014\021\uffee\031\uffee\032\uffee\033\uffee" +
-    "\034\uffee\001\002\000\014\021\ufff1\031\ufff1\032\ufff1\033" +
-    "\124\034\122\001\002" });
+    "\006\075\001\002\000\004\005\076\001\002\000\010\005" +
+    "\uffe5\021\uffe5\030\uffe5\001\002\000\010\005\uffe6\023\uffe6" +
+    "\024\uffe6\001\002\000\004\015\101\001\002\000\006\007" +
+    "\103\027\065\001\002\000\004\021\105\001\002\000\004" +
+    "\021\104\001\002\000\010\005\uffe8\023\uffe8\024\uffe8\001" +
+    "\002\000\010\005\uffe7\023\uffe7\024\uffe7\001\002\000\004" +
+    "\012\107\001\002\000\004\004\110\001\002\000\006\023" +
+    "\111\024\112\001\002\000\004\031\157\001\002\000\012" +
+    "\031\122\033\117\036\120\037\121\001\002\000\010\005" +
+    "\uffe2\023\uffe2\024\uffe2\001\002\000\010\005\115\023\111" +
+    "\024\112\001\002\000\012\005\uffe4\010\uffe4\022\uffe4\023" +
+    "\uffe4\001\002\000\010\005\uffe3\023\uffe3\024\uffe3\001\002" +
+    "\000\004\015\152\001\002\000\004\015\145\001\002\000" +
+    "\004\015\140\001\002\000\004\032\123\001\002\000\004" +
+    "\034\124\001\002\000\004\015\125\001\002\000\004\004" +
+    "\126\001\002\000\010\006\133\014\131\027\065\001\002" +
+    "\000\006\005\uffd5\030\uffd5\001\002\000\006\005\135\030" +
+    "\134\001\002\000\006\005\uffd6\030\uffd6\001\002\000\006" +
+    "\005\uffd8\030\uffd8\001\002\000\006\005\uffd7\030\uffd7\001" +
+    "\002\000\010\006\133\014\131\027\065\001\002\000\004" +
+    "\021\136\001\002\000\010\005\uffdb\023\uffdb\024\uffdb\001" +
+    "\002\000\006\005\uffd9\030\uffd9\001\002\000\006\006\142" +
+    "\014\141\001\002\000\004\021\144\001\002\000\004\021" +
+    "\143\001\002\000\010\005\uffde\023\uffde\024\uffde\001\002" +
+    "\000\010\005\uffdf\023\uffdf\024\uffdf\001\002\000\006\006" +
+    "\147\014\146\001\002\000\004\021\151\001\002\000\004" +
+    "\021\150\001\002\000\010\005\uffdc\023\uffdc\024\uffdc\001" +
+    "\002\000\010\005\uffdd\023\uffdd\024\uffdd\001\002\000\006" +
+    "\006\154\014\153\001\002\000\004\021\156\001\002\000" +
+    "\004\021\155\001\002\000\010\005\uffe0\023\uffe0\024\uffe0" +
+    "\001\002\000\010\005\uffe1\023\uffe1\024\uffe1\001\002\000" +
+    "\004\032\160\001\002\000\004\035\161\001\002\000\004" +
+    "\015\162\001\002\000\004\004\163\001\002\000\012\007" +
+    "\167\014\165\025\170\027\065\001\002\000\006\005\uffd0" +
+    "\030\uffd0\001\002\000\006\005\uffd1\030\uffd1\001\002\000" +
+    "\006\005\173\030\172\001\002\000\006\005\uffd2\030\uffd2" +
+    "\001\002\000\006\005\uffcf\030\uffcf\001\002\000\006\005" +
+    "\uffd3\030\uffd3\001\002\000\012\007\167\014\165\025\170" +
+    "\027\065\001\002\000\004\021\174\001\002\000\010\005" +
+    "\uffda\023\uffda\024\uffda\001\002\000\006\005\uffd4\030\uffd4" +
+    "\001\002\000\004\002\000\001\002\000\012\005\uffff\010" +
+    "\uffff\022\uffff\023\uffff\001\002\000\004\015\201\001\002" +
+    "\000\004\025\203\001\002\000\014\021\204\040\205\041" +
+    "\207\042\210\043\206\001\002\000\014\021\uffed\040\uffed" +
+    "\041\uffed\042\uffed\043\uffed\001\002\000\012\005\ufff9\010" +
+    "\ufff9\022\ufff9\023\ufff9\001\002\000\004\025\203\001\002" +
+    "\000\004\025\203\001\002\000\004\025\203\001\002\000" +
+    "\004\025\203\001\002\000\014\021\uffef\040\uffef\041\uffef" +
+    "\042\uffef\043\uffef\001\002\000\014\021\ufff0\040\ufff0\041" +
+    "\ufff0\042\210\043\206\001\002\000\014\021\uffee\040\uffee" +
+    "\041\uffee\042\uffee\043\uffee\001\002\000\014\021\ufff1\040" +
+    "\ufff1\041\ufff1\042\210\043\206\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -115,11 +156,11 @@ public class SintacticoStatPy extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\126\000\004\002\004\001\001\000\002\001\001\000" +
+    "\000\212\000\004\002\004\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\016\003\015\004\021\005" +
     "\020\006\022\007\016\010\013\001\001\000\002\001\001" +
-    "\000\014\003\112\004\021\005\020\006\022\007\016\001" +
+    "\000\014\003\176\004\021\005\020\006\022\007\016\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\004\013\025\001\001" +
@@ -139,12 +180,30 @@ public class SintacticoStatPy extends java_cup.runtime.lr_parser {
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\004\015\101\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\006\016" +
+    "\113\017\112\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\004\017\115\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\010\015\126\020\127" +
+    "\021\131\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\006" +
+    "\015\126\021\136\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\004\014\115\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\004\014\127" +
-    "\001\001\000\004\014\126\001\001\000\004\014\125\001" +
-    "\001\000\004\014\124\001\001\000\002\001\001\000\002" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\010\015\163\022\165\023\170\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\006" +
+    "\015\163\023\174\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\004\014\201\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\004\014\213" +
+    "\001\001\000\004\014\212\001\001\000\004\014\211\001" +
+    "\001\000\004\014\210\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
@@ -199,7 +258,9 @@ public class SintacticoStatPy extends java_cup.runtime.lr_parser {
 
     //Tabla de Variables y Tokens
     public HashMap<String, Object> t_variables = new HashMap<String, Object>();
-    
+    public String Titulo_Barras,TituloEjeX_Barras,TituloEjeY_Barras;
+    public List<String> EjeX= new ArrayList<String>();
+    public List<Double> Valores= new ArrayList<Double>();
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -487,7 +548,7 @@ class CUP$SintacticoStatPy$actions {
           case 21: // globales ::= VOID DEFGLOB PARIZQ PARDER BRAIZQ listaglobales BRADER 
             {
               Object RESULT =null;
-		System.out.println("global");
+		
               CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("globales",3, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-6)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatPy$result;
@@ -520,7 +581,7 @@ class CUP$SintacticoStatPy$actions {
 		int bleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
 		String b = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
-		System.out.println(a+" "+b);
+		t_variables.put(a,b.replace("\"",""));
               CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("variablesglobales",8, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatPy$result;
@@ -535,7 +596,7 @@ class CUP$SintacticoStatPy$actions {
 		int bleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
 		String b = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
-		System.out.println(a+" "+b);
+		t_variables.put(a,b);
               CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("variablesglobales",8, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatPy$result;
@@ -550,7 +611,7 @@ class CUP$SintacticoStatPy$actions {
 		int bleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
-		System.out.println(b);
+		t_variables.put(a,b);
               CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("variablesglobales",8, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatPy$result;
@@ -565,7 +626,7 @@ class CUP$SintacticoStatPy$actions {
 		int bleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
-		System.out.println(b);
+		t_variables.put(a,b);
               CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("variablesglobales",8, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatPy$result;
@@ -588,16 +649,246 @@ RESULT=var;
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 29: // barras ::= VOID GRAFBAR PARIZQ PARDER BRAIZQ BRADER 
+          case 29: // barras ::= VOID GRAFBAR PARIZQ PARDER BRAIZQ listabarras BRADER 
             {
               Object RESULT =null;
 		System.out.println("barras");
-              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("barras",4, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-5)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("barras",4, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-6)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatPy$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 30: // pie ::= VOID GRAFPI PARIZQ PARDER BRAIZQ BRADER 
+          case 30: // listabarras ::= listabarras instruccionesbarras 
+            {
+              Object RESULT =null;
+
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("listabarras",12, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 31: // listabarras ::= instruccionesbarras 
+            {
+              Object RESULT =null;
+
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("listabarras",12, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 32: // instruccionesbarras ::= STRING TITULO IGUAL IDENT PTOCOMA 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
+		Titulo_Barras=t_variables.get(a).toString();
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("instruccionesbarras",13, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 33: // instruccionesbarras ::= STRING TITULO IGUAL CADENA PTOCOMA 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
+		Titulo_Barras=a.replace("\"","");
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("instruccionesbarras",13, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 34: // instruccionesbarras ::= STRING TITULOX IGUAL IDENT PTOCOMA 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
+		TituloEjeX_Barras=t_variables.get(a).toString();
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("instruccionesbarras",13, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 35: // instruccionesbarras ::= STRING TITULOX IGUAL CADENA PTOCOMA 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
+		TituloEjeX_Barras=a.replace("\"","");
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("instruccionesbarras",13, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 36: // instruccionesbarras ::= STRING TITULOY IGUAL IDENT PTOCOMA 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
+		TituloEjeY_Barras=t_variables.get(a).toString();
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("instruccionesbarras",13, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 37: // instruccionesbarras ::= STRING TITULOY IGUAL CADENA PTOCOMA 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
+		TituloEjeY_Barras=a.replace("\"","");
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("instruccionesbarras",13, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-4)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 38: // instruccionesbarras ::= STRING LLAIZQ LLADER EJEX IGUAL BRAIZQ listastring BRADER PTOCOMA 
+            {
+              Object RESULT =null;
+
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("instruccionesbarras",13, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-8)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 39: // instruccionesbarras ::= DOUBLE LLAIZQ LLADER VALORES IGUAL BRAIZQ listadouble BRADER PTOCOMA 
+            {
+              Object RESULT =null;
+
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("instruccionesbarras",13, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-8)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 40: // listastring ::= listastring COMA arreglostring 
+            {
+              Object RESULT =null;
+
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("listastring",14, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-2)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 41: // listastring ::= arreglostring 
+            {
+              Object RESULT =null;
+
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("listastring",14, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 42: // arreglostring ::= CADENA 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
+		EjeX.add(a.replace("\"",""));
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("arreglostring",15, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 43: // arreglostring ::= IDENT 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
+		EjeX.add(t_variables.get(a).toString());
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("arreglostring",15, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 44: // arreglostring ::= variablesjson 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
+		EjeX.add(a.toString());
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("arreglostring",15, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 45: // listadouble ::= listadouble COMA arreglodouble 
+            {
+              Object RESULT =null;
+
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("listadouble",16, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-2)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 46: // listadouble ::= arreglodouble 
+            {
+              Object RESULT =null;
+
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("listadouble",16, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 47: // arreglodouble ::= DECIMAL 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
+		Valores.add(Double.parseDouble(a));
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("arreglodouble",17, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 48: // arreglodouble ::= IDENT 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
+		String numero=t_variables.get(a).toString();
+                          Valores.add(Double.parseDouble(numero));
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("arreglodouble",17, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 49: // arreglodouble ::= variablesjson 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
+		String numero=a.toString();
+                                  Valores.add(Double.parseDouble(numero));
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("arreglodouble",17, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 50: // arreglodouble ::= ENTERO 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
+		Valores.add(Double.parseDouble(a));
+              CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("arreglodouble",17, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
+            }
+          return CUP$SintacticoStatPy$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 51: // pie ::= VOID GRAFPI PARIZQ PARDER BRAIZQ BRADER 
             {
               Object RESULT =null;
 		System.out.println("pie");

@@ -8,9 +8,11 @@ package analizadores;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
+  public static final int LLAIZQ = 23;
   public static final int NEWVAL = 20;
-  public static final int MENOS = 24;
+  public static final int MENOS = 31;
   public static final int BRADER = 3;
+  public static final int LLADER = 24;
   public static final int IDENT = 10;
   public static final int CADENA = 4;
   public static final int DOLAR = 21;
@@ -18,11 +20,12 @@ public class sym {
   public static final int INT = 16;
   public static final int DEFGLOB = 12;
   public static final int DECIMAL = 5;
-  public static final int DIVIDIDO = 26;
+  public static final int DIVIDIDO = 33;
   public static final int GRAFBAR = 13;
   public static final int PARIZQ = 9;
   public static final int PARDER = 8;
-  public static final int POR = 25;
+  public static final int POR = 32;
+  public static final int VALORES = 27;
   public static final int COMA = 22;
   public static final int STRING = 18;
   public static final int EOF = 0;
@@ -30,9 +33,13 @@ public class sym {
   public static final int error = 1;
   public static final int GRAFPI = 14;
   public static final int PTOCOMA = 15;
+  public static final int EJEX = 26;
   public static final int ENTERO = 19;
+  public static final int TITULOY = 28;
   public static final int VOID = 6;
-  public static final int MAS = 23;
+  public static final int TITULOX = 29;
+  public static final int TITULO = 25;
+  public static final int MAS = 30;
   public static final int DOUBLE = 17;
   public static final int BRAIZQ = 2;
   public static final String[] terminalNames = new String[] {
@@ -59,6 +66,13 @@ public class sym {
   "NEWVAL",
   "DOLAR",
   "COMA",
+  "LLAIZQ",
+  "LLADER",
+  "TITULO",
+  "EJEX",
+  "VALORES",
+  "TITULOY",
+  "TITULOX",
   "MAS",
   "MENOS",
   "POR",

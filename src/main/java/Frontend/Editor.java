@@ -10,6 +10,8 @@ import analizadores.SintacticoJSON;
 import analizadores.SintacticoStatPy;
 import analizadores.LexicoStatPy;
 import analizadores.TokenJson;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,12 +19,18 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import java_cup.runtime.Symbol;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 /**
  *
  * @author USUARIO
@@ -214,6 +222,8 @@ public class Editor extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -293,6 +303,23 @@ public class Editor extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu4.setText("Report");
+
+        jMenuItem6.setText("Barras");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem6);
+
+        jMenuItem7.setText("Pie");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem7);
+
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -349,6 +376,9 @@ public class Editor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     File selectedFile=null;
     String TipoAnalizador="";
+    String Titulo_Barras,TituloEjeX_Barras,TituloEjeY_Barras;
+    List<String> EjeX= new ArrayList<String>();
+    List<Double> Valores= new ArrayList<Double>();
     
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         JFileChooser fileChooser = new JFileChooser();
@@ -403,7 +433,11 @@ public class Editor extends javax.swing.JFrame {
                 LexicoStatPy lex=new LexicoStatPy(new FileReader(selectedFile.getAbsolutePath()));
                 pars=new SintacticoStatPy(lex);
                 pars.parse();
-                
+                Titulo_Barras=pars.Titulo_Barras;
+                TituloEjeX_Barras=pars.TituloEjeX_Barras;
+                TituloEjeY_Barras=pars.TituloEjeY_Barras;
+                EjeX=pars.EjeX;
+                Valores=pars.Valores;
                 JOptionPane.showMessageDialog(null, "Archivo Analizado","AVISO", JOptionPane.INFORMATION_MESSAGE);
                 
                 
@@ -435,6 +469,44 @@ public class Editor extends javax.swing.JFrame {
         jLabel5.setText("StatPy");
         TipoAnalizador="StatPy";
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        Ventana_Barras a=new Ventana_Barras();
+        a.setVisible(true);
+        
+        
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        
+        for (int i = 0; i < Valores.size(); i++) {
+            dataset.addValue(Valores.get(i), TituloEjeX_Barras, EjeX.get(i));
+        }
+        
+        
+        // Crear la gráfica de barras
+        
+        JFreeChart chart = ChartFactory.createBarChart(
+                Titulo_Barras,// title
+                TituloEjeX_Barras,//x axis
+                TituloEjeY_Barras,//y axis
+                dataset,
+                PlotOrientation.VERTICAL,
+                true,
+                true,
+                false
+        );
+        
+        ChartPanel panel=new ChartPanel(chart);
+        panel.setMouseWheelEnabled(true);
+        panel.setPreferredSize(new Dimension(700,300));
+        
+        Ventana_Barras.jPanel1.setLayout(new BorderLayout());
+        Ventana_Barras.jPanel1.add(panel,BorderLayout.NORTH);
+        
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -486,6 +558,8 @@ public class Editor extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;

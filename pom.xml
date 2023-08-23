@@ -21,6 +21,16 @@
             <artifactId>runtime</artifactId>
             <version>11b</version>
         </dependency>
+        <dependency>
+            <groupId>jcommon</groupId>
+            <artifactId>jcommon</artifactId>
+            <version>1.0.23</version>
+        </dependency>
+        <dependency>
+            <groupId>jfreechart</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.0.19</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

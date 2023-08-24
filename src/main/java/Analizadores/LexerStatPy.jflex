@@ -37,6 +37,8 @@ comentariomultilinea="/*" {any}* "*/"
 D=[0-9]
 L=[a-zA-Z_ñÑ]
 entero=[0-9]+
+CHAR = ([\']([^\t\'\"\n]|(\\\")|(\\n)|(\\\')|(\\t))?[\'])|(['][\$][{](6[5-9]|[7-8][0-9]|90|9[7-9]|10[0-9]|11[0-9]|12[0-2])[}]['])
+BOOLEAN = True|False
 
 
 %%
@@ -49,6 +51,9 @@ entero=[0-9]+
 
 "string" {T_SIMBOLOS.add(new Symbol(sym.STRING,yyline,yychar, yytext()));
          return new Symbol(sym.STRING,yyline,yychar, yytext());}
+
+"char" {T_SIMBOLOS.add(new Symbol(sym.PCHAR,yyline,yychar, yytext()));
+         return new Symbol(sym.PCHAR,yyline,yychar, yytext());}
 
 "void" {T_SIMBOLOS.add(new Symbol(sym.VOID,yyline,yychar, yytext()));
         return new Symbol(sym.VOID,yyline,yychar, yytext());}
@@ -82,6 +87,40 @@ entero=[0-9]+
 
 "TituloX"   {T_SIMBOLOS.add(new Symbol(sym.TITULOX,yyline,yychar, yytext()));
               return new Symbol(sym.TITULOX,yyline,yychar, yytext());}
+
+"Console"   {T_SIMBOLOS.add(new Symbol(sym.CONSOLE,yyline,yychar, yytext()));
+              return new Symbol(sym.CONSOLE,yyline,yychar, yytext());}
+
+"Write"   {T_SIMBOLOS.add(new Symbol(sym.WRITE,yyline,yychar, yytext()));
+              return new Symbol(sym.WRITE,yyline,yychar, yytext());}
+
+">" {T_SIMBOLOS.add(new Symbol(sym.MAYOR,yyline,yychar, yytext()));
+        return new Symbol(sym.MAYOR,yyline,yychar, yytext());}
+
+"<" {T_SIMBOLOS.add(new Symbol(sym.MENOR,yyline,yychar, yytext()));
+        return new Symbol(sym.MENOR,yyline,yychar, yytext());}
+
+">=" {T_SIMBOLOS.add(new Symbol(sym.MAYORIGUAL,yyline,yychar, yytext()));
+        return new Symbol(sym.MAYORIGUAL,yyline,yychar, yytext());}
+
+"<=" {T_SIMBOLOS.add(new Symbol(sym.MENORIGUAL,yyline,yychar, yytext()));
+        return new Symbol(sym.MENORIGUAL,yyline,yychar, yytext());}
+
+"==" {T_SIMBOLOS.add(new Symbol(sym.EQUALS,yyline,yychar, yytext()));
+        return new Symbol(sym.EQUALS,yyline,yychar, yytext());}
+
+"!=" {T_SIMBOLOS.add(new Symbol(sym.NOTEQUALS,yyline,yychar, yytext()));
+        return new Symbol(sym.NOTEQUALS,yyline,yychar, yytext());}
+
+"&&" {T_SIMBOLOS.add(new Symbol(sym.AND,yyline,yychar, yytext()));
+        return new Symbol(sym.AND,yyline,yychar, yytext());}
+
+"||" {T_SIMBOLOS.add(new Symbol(sym.OR,yyline,yychar, yytext()));
+        return new Symbol(sym.OR,yyline,yychar, yytext());}
+
+"!" {T_SIMBOLOS.add(new Symbol(sym.NOT,yyline,yychar, yytext()));
+        return new Symbol(sym.NOT,yyline,yychar, yytext());}
+
 
 "+" {T_SIMBOLOS.add(new Symbol(sym.MAS,yyline,yychar, yytext()));
         return new Symbol(sym.MAS,yyline,yychar, yytext());}
@@ -129,6 +168,9 @@ entero=[0-9]+
 "," {T_SIMBOLOS.add(new Symbol(sym.COMA,yyline,yychar, yytext()));
      return new Symbol(sym.COMA,yyline,yychar, yytext());}
 
+"." {T_SIMBOLOS.add(new Symbol(sym.PUNTO,yyline,yychar, yytext()));
+     return new Symbol(sym.PUNTO,yyline,yychar, yytext());}
+
 \n {yychar=0;}
 
 {L}({L}|{D})* {T_SIMBOLOS.add(new Symbol(sym.IDENT,yyline,yychar, yytext()));
@@ -137,11 +179,17 @@ entero=[0-9]+
 {cadena} {T_SIMBOLOS.add(new Symbol(sym.CADENA,yyline,yychar, yytext()));
           return new Symbol(sym.CADENA,yyline,yychar, yytext());}
 
+{CHAR} {T_SIMBOLOS.add(new Symbol(sym.CHAR,yyline,yychar, yytext()));
+          return new Symbol(sym.CHAR,yyline,yychar, yytext());}
+
 {entero} {T_SIMBOLOS.add(new Symbol(sym.ENTERO,yyline,yychar, yytext()));
         return new Symbol(sym.ENTERO,yyline,yychar, yytext());}
 
 {DD} {T_SIMBOLOS.add(new Symbol(sym.DECIMAL,yyline,yychar, yytext()));
       return new Symbol(sym.DECIMAL,yyline,yychar, yytext());}
+
+{BOOLEAN} {T_SIMBOLOS.add(new Symbol(sym.TF,yyline,yychar, yytext()));
+      return new Symbol(sym.TF,yyline,yychar, yytext());}
 
 {comentariosimple} {/*Ignorar Espacios Comentarios*/}
 {BLANCOS} {/*Ignorar Espacios en Blanco*/}

@@ -489,6 +489,24 @@ public class Editor extends javax.swing.JFrame {
                 //Generamos Tabla de Simbolos
                 ReporteSimbolos_Stat(lex.T_SIMBOLOS,removeExtension(selectedFile.getName()));
                 
+                String cabecera="def main():\n";
+                
+                String footer="""
+                              
+                              if__name__ = “__main__”:
+                                 main()
+                              """;
+                
+                String instrucciones="";
+                
+                for(String trad:pars.Traducciones){
+                    instrucciones+="    "+trad+"\n";
+                }
+                
+                
+                jTextArea2.setText(cabecera+instrucciones+footer);
+                
+                
                 JOptionPane.showMessageDialog(null, "Archivo Analizado","AVISO", JOptionPane.INFORMATION_MESSAGE);
                 
                 

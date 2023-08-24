@@ -8,40 +8,56 @@ package analizadores;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int LLAIZQ = 23;
-  public static final int NEWVAL = 20;
-  public static final int MENOS = 31;
   public static final int BRADER = 3;
-  public static final int LLADER = 24;
-  public static final int IDENT = 10;
-  public static final int CADENA = 4;
-  public static final int DOLAR = 21;
-  public static final int IGUAL = 11;
-  public static final int INT = 16;
-  public static final int DEFGLOB = 12;
-  public static final int DECIMAL = 5;
-  public static final int DIVIDIDO = 33;
-  public static final int GRAFBAR = 13;
-  public static final int PARIZQ = 9;
-  public static final int PARDER = 8;
-  public static final int POR = 32;
-  public static final int VALORES = 27;
-  public static final int COMA = 22;
-  public static final int STRING = 18;
-  public static final int EOF = 0;
-  public static final int MAIN = 7;
-  public static final int error = 1;
-  public static final int GRAFPI = 14;
-  public static final int PTOCOMA = 15;
-  public static final int EJEX = 26;
+  public static final int CHAR = 47;
+  public static final int POR = 35;
+  public static final int EQUALS = 41;
+  public static final int NEWVAL = 20;
   public static final int ENTERO = 19;
-  public static final int TITULOY = 28;
-  public static final int VOID = 6;
-  public static final int TITULOX = 29;
-  public static final int TITULO = 25;
-  public static final int MAS = 30;
   public static final int DOUBLE = 17;
+  public static final int PCHAR = 48;
+  public static final int INT = 16;
+  public static final int TITULOY = 28;
+  public static final int WRITE = 31;
+  public static final int TITULOX = 29;
+  public static final int AND = 44;
+  public static final int NOT = 43;
+  public static final int MENORIGUAL = 40;
+  public static final int EJEX = 26;
+  public static final int IGUAL = 11;
+  public static final int DIVIDIDO = 36;
+  public static final int OR = 45;
+  public static final int TITULO = 25;
+  public static final int UMENOS = 46;
+  public static final int MAIN = 7;
+  public static final int LLAIZQ = 23;
+  public static final int MAYORIGUAL = 39;
+  public static final int PTOCOMA = 15;
+  public static final int EOF = 0;
+  public static final int PARIZQ = 9;
+  public static final int DECIMAL = 5;
+  public static final int VALORES = 27;
+  public static final int DEFGLOB = 12;
+  public static final int error = 1;
+  public static final int COMA = 22;
+  public static final int CADENA = 4;
+  public static final int MENOS = 34;
+  public static final int MENOR = 38;
   public static final int BRAIZQ = 2;
+  public static final int IDENT = 10;
+  public static final int VOID = 6;
+  public static final int MAYOR = 37;
+  public static final int GRAFBAR = 13;
+  public static final int PUNTO = 32;
+  public static final int NOTEQUALS = 42;
+  public static final int TF = 49;
+  public static final int STRING = 18;
+  public static final int LLADER = 24;
+  public static final int GRAFPI = 14;
+  public static final int PARDER = 8;
+  public static final int DOLAR = 21;
+  public static final int CONSOLE = 30;
+  public static final int MAS = 33;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -73,10 +89,26 @@ public class sym {
   "VALORES",
   "TITULOY",
   "TITULOX",
+  "CONSOLE",
+  "WRITE",
+  "PUNTO",
   "MAS",
   "MENOS",
   "POR",
-  "DIVIDIDO"
+  "DIVIDIDO",
+  "MAYOR",
+  "MENOR",
+  "MAYORIGUAL",
+  "MENORIGUAL",
+  "EQUALS",
+  "NOTEQUALS",
+  "NOT",
+  "AND",
+  "OR",
+  "UMENOS",
+  "CHAR",
+  "PCHAR",
+  "TF"
   };
 }
 

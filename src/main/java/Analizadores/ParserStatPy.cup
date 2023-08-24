@@ -29,23 +29,29 @@ parser code
     public String Titulo_Pie;
     public List<String> EjeX_Pie= new ArrayList<String>();
     public List<Double> Valores_Pie= new ArrayList<Double>();
+    public List<String> Traducciones= new ArrayList<String>();
 :} 
 
 terminal String BRAIZQ,BRADER,CADENA,DECIMAL,VOID,MAIN,PARDER,PARIZQ,IDENT,IGUAL,DEFGLOB,GRAFBAR,GRAFPI,PTOCOMA,INT,DOUBLE,STRING,ENTERO;
-terminal String NEWVAL,DOLAR,COMA,LLAIZQ,LLADER,TITULO,EJEX,VALORES,TITULOY,TITULOX;
+terminal String NEWVAL,DOLAR,COMA,LLAIZQ,LLADER,TITULO,EJEX,VALORES,TITULOY,TITULOX,CONSOLE,WRITE,PUNTO;
 terminal String MAS,MENOS,POR,DIVIDIDO;
-
+terminal String MAYOR,MENOR,MAYORIGUAL,MENORIGUAL,EQUALS,NOTEQUALS,NOT,AND,OR;
+terminal String UMENOS;
+terminal String CHAR,PCHAR,TF;
 
 
 non terminal inicio,instrucciones,sentencias,globales,barras,pie,listainstrucciones,listaglobales,variablesglobales;
-non terminal String expresiondecimal,expresionentero;
+non terminal String expresion;
 non terminal variablesjson,listabarras,instruccionesbarras,listastring,arreglostring,listadouble,arreglodouble;
 nonterminal  listapie,instruccionespie,listastringpie,arreglostringpie,listadoublepie,arreglodoublepie;
+non terminal String aritmetica,logica,symbols,uno;
+non terminal String declaracion,print;
 
-
+precedence left MAYOR,MENOR,MAYORIGUAL,MENORIGUAL,EQUALS,NOTEQUALS;
+precedence left AND, OR;
 precedence left MAS,MENOS;
 precedence left POR,DIVIDIDO;
-
+precedence right UMENOS,NOT;
 
 
 start with inicio; 
@@ -59,34 +65,62 @@ listainstrucciones::= listainstrucciones instrucciones
                       |instrucciones
 ;
 
-instrucciones::=sentencias
+instrucciones::= sentencias
                 |globales
                 |barras
                 |pie
 ;
 
-sentencias::=INT IDENT IGUAL expresionentero:exp PTOCOMA{:System.out.println(exp);:}
-            |DOUBLE IDENT IGUAL expresiondecimal:exp PTOCOMA{:System.out.println(exp);:}
+sentencias::=declaracion:a{:Traducciones.add(a);:}
+            | print:a{:Traducciones.add(a);:}
 ;
 
-expresiondecimal ::= expresiondecimal:a MAS expresiondecimal:b {:RESULT=a+"+"+b;:}	
-	|  expresiondecimal:a MENOS expresiondecimal:b	{:RESULT=a+"-"+b;:}	
-	|  expresiondecimal:a POR expresiondecimal:b    {:RESULT=a+"*"+b;:}
-	|  expresiondecimal:a DIVIDIDO expresiondecimal:b {:RESULT=a+"/"+b;:}		
+declaracion ::=INT IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
+            |DOUBLE IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
+;
+
+print::=CONSOLE:a PUNTO:b WRITE:c PARIZQ:d expresion:exp PARDER:e PTOCOMA:f{:RESULT="print("+exp+")";:}
+;
+
+expresion ::=symbols:a{:RESULT=a;:}
+            | uno:a {:RESULT=a;:}
+            | aritmetica:a{:RESULT=a;:}
+            | logica:a {:RESULT=a;:}
+            | PARIZQ expresion:a PARDER{:RESULT="("+a+")";:}
+;
+
+symbols::=IDENT:a{:RESULT=a;:}
+         |CADENA:a{:RESULT=a;:}
+         |CHAR:a{:RESULT=a;:}
+         |TF:a {:RESULT=a;:}
+;
+
+aritmetica ::= expresion:a MAS expresion:b {:RESULT=a+"+"+b;:}	
+	|  expresion:a MENOS expresion:b	{:RESULT=a+"-"+b;:}	
+	|  expresion:a POR expresion:b    {:RESULT=a+"*"+b;:}
+	|  expresion:a DIVIDIDO expresion:b {:RESULT=a+"/"+b;:}
         |  DECIMAL:dec {:RESULT=dec;:}	
         |  ENTERO:en {:RESULT=en;:}
 ;
 
-expresionentero ::= expresionentero:a MAS expresionentero:b {:RESULT=a+"+"+b;:}	
-	|  expresionentero:a MENOS expresionentero:b	{:RESULT=a+"-"+b;:}	
-	|  expresionentero:a POR expresionentero:b    {:RESULT=a+"*"+b;:}
-	|  expresionentero:a DIVIDIDO expresionentero:b {:RESULT=a+"/"+b;:}		
-        |  ENTERO:dec {:RESULT=dec;:}	
+logica::=expresion:a MAYOR:b expresion:c{:RESULT=a+b+c;:}
+        |expresion:a MENOR:b expresion:c{:RESULT=a+b+c;:}
+        |expresion:a MAYORIGUAL:b expresion:c{:RESULT=a+b+c;:}
+        |expresion:a MENORIGUAL:b expresion:c{:RESULT=a+b+c;:}
+        |expresion:a EQUALS:b expresion:c{:RESULT=a+b+c;:}
+        |expresion:a NOTEQUALS:b expresion:c{:RESULT=a+b+c;:}
+        |expresion:a AND expresion:c{:RESULT=a+" and "+c;:}
+        |expresion:a OR expresion:c{:RESULT=a+" or "+c;:}
+;
+
+
+uno::=MENOS:a expresion:b{:RESULT=a+b;:} %prec UMENOS
+    |NOT expresion:b   {:RESULT="not "+b;:} %prec NOT
 ;
 
 
 
-globales::=VOID DEFGLOB PARIZQ PARDER BRAIZQ listaglobales BRADER{::}
+globales::=VOID DEFGLOB PARIZQ PARDER BRAIZQ listaglobales BRADER
            
 ;
 
@@ -105,7 +139,7 @@ Object var=Variable.BuscarVariable(a.replace("\"",""),b.replace("\"",""));
 RESULT=var;:}
 ;
 
-barras::=VOID GRAFBAR PARIZQ PARDER BRAIZQ listabarras BRADER{:System.out.println("barras");:}
+barras::=VOID GRAFBAR PARIZQ PARDER BRAIZQ listabarras BRADER
          
 ;
 
@@ -148,7 +182,7 @@ arreglodouble ::=DECIMAL:a{:Valores.add(Double.parseDouble(a));:}
                 |ENTERO:a{:Valores.add(Double.parseDouble(a));:}
 ;
 
-pie::=VOID GRAFPI PARIZQ PARDER BRAIZQ listapie BRADER{:System.out.println("pie");:}
+pie::=VOID GRAFPI PARIZQ PARDER BRAIZQ listapie BRADER
 ;
 
 

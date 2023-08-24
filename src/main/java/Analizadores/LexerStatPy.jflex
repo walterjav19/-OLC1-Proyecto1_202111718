@@ -43,6 +43,12 @@ BOOLEAN = True|False
 
 %%
 
+"if" {T_SIMBOLOS.add(new Symbol(sym.IF,yyline,yychar, yytext()));
+       return new Symbol(sym.IF,yyline,yychar, yytext());}
+
+"else" {T_SIMBOLOS.add(new Symbol(sym.ELSE,yyline,yychar, yytext()));
+       return new Symbol(sym.ELSE,yyline,yychar, yytext());}
+
 "int" {T_SIMBOLOS.add(new Symbol(sym.INT,yyline,yychar, yytext()));
        return new Symbol(sym.INT,yyline,yychar, yytext());}
 
@@ -54,6 +60,9 @@ BOOLEAN = True|False
 
 "char" {T_SIMBOLOS.add(new Symbol(sym.PCHAR,yyline,yychar, yytext()));
          return new Symbol(sym.PCHAR,yyline,yychar, yytext());}
+
+"bool" {T_SIMBOLOS.add(new Symbol(sym.BOOL,yyline,yychar, yytext()));
+         return new Symbol(sym.BOOL,yyline,yychar, yytext());}
 
 "void" {T_SIMBOLOS.add(new Symbol(sym.VOID,yyline,yychar, yytext()));
         return new Symbol(sym.VOID,yyline,yychar, yytext());}

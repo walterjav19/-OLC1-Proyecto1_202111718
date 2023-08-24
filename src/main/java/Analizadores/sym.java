@@ -27,7 +27,9 @@ public class sym {
   public static final int IGUAL = 11;
   public static final int DIVIDIDO = 36;
   public static final int OR = 45;
+  public static final int BOOL = 50;
   public static final int TITULO = 25;
+  public static final int IF = 51;
   public static final int UMENOS = 46;
   public static final int MAIN = 7;
   public static final int LLAIZQ = 23;
@@ -47,6 +49,7 @@ public class sym {
   public static final int IDENT = 10;
   public static final int VOID = 6;
   public static final int MAYOR = 37;
+  public static final int ELSE = 52;
   public static final int GRAFBAR = 13;
   public static final int PUNTO = 32;
   public static final int NOTEQUALS = 42;
@@ -108,7 +111,10 @@ public class sym {
   "UMENOS",
   "CHAR",
   "PCHAR",
-  "TF"
+  "TF",
+  "BOOL",
+  "IF",
+  "ELSE"
   };
 }
 

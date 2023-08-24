@@ -37,7 +37,7 @@ terminal String NEWVAL,DOLAR,COMA,LLAIZQ,LLADER,TITULO,EJEX,VALORES,TITULOY,TITU
 terminal String MAS,MENOS,POR,DIVIDIDO;
 terminal String MAYOR,MENOR,MAYORIGUAL,MENORIGUAL,EQUALS,NOTEQUALS,NOT,AND,OR;
 terminal String UMENOS;
-terminal String CHAR,PCHAR,TF;
+terminal String CHAR,PCHAR,TF,BOOL,IF,ELSE;
 
 
 non terminal inicio,instrucciones,sentencias,globales,barras,pie,listainstrucciones,listaglobales,variablesglobales;
@@ -45,7 +45,7 @@ non terminal String expresion;
 non terminal variablesjson,listabarras,instruccionesbarras,listastring,arreglostring,listadouble,arreglodouble;
 nonterminal  listapie,instruccionespie,listastringpie,arreglostringpie,listadoublepie,arreglodoublepie;
 non terminal String aritmetica,logica,symbols,uno;
-non terminal String declaracion,print;
+non terminal String declaracion,print,if,listaif,ifanidado;
 
 precedence left MAYOR,MENOR,MAYORIGUAL,MENORIGUAL,EQUALS,NOTEQUALS;
 precedence left AND, OR;
@@ -73,10 +73,30 @@ instrucciones::= sentencias
 
 sentencias::=declaracion:a{:Traducciones.add(a);:}
             | print:a{:Traducciones.add(a);:}
+            | if{::}
 ;
+
+
+
+if::=IF PARIZQ PARDER BRAIZQ BRADER listaif{:System.out.println("if");:}
+;
+
+
+listaif::= listaif ifanidado
+          |ifanidado
+;
+
+ifanidado::=ELSE IF PARIZQ PARDER BRAIZQ BRADER{:System.out.println("else if");:}
+            |ELSE BRAIZQ BRADER{:System.out.println("else");:}
+;
+
+
 
 declaracion ::=INT IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
             |DOUBLE IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
+            |STRING IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
+            |PCHAR IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
+            |BOOL IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
 ;
 
 print::=CONSOLE:a PUNTO:b WRITE:c PARIZQ:d expresion:exp PARDER:e PTOCOMA:f{:RESULT="print("+exp+")";:}
@@ -103,12 +123,12 @@ aritmetica ::= expresion:a MAS expresion:b {:RESULT=a+"+"+b;:}
         |  ENTERO:en {:RESULT=en;:}
 ;
 
-logica::=expresion:a MAYOR:b expresion:c{:RESULT=a+b+c;:}
-        |expresion:a MENOR:b expresion:c{:RESULT=a+b+c;:}
-        |expresion:a MAYORIGUAL:b expresion:c{:RESULT=a+b+c;:}
-        |expresion:a MENORIGUAL:b expresion:c{:RESULT=a+b+c;:}
-        |expresion:a EQUALS:b expresion:c{:RESULT=a+b+c;:}
-        |expresion:a NOTEQUALS:b expresion:c{:RESULT=a+b+c;:}
+logica::=expresion:a MAYOR:b expresion:c{:RESULT=a+" "+b+" "+c;:}
+        |expresion:a MENOR:b expresion:c{:RESULT=a+" "+b+" "+c;:}
+        |expresion:a MAYORIGUAL:b expresion:c{:RESULT=a+" "+b+" "+c;:}
+        |expresion:a MENORIGUAL:b expresion:c{:RESULT=a+" "+b+" "+c;:}
+        |expresion:a EQUALS:b expresion:c{:RESULT=a+" "+b+" "+c;:}
+        |expresion:a NOTEQUALS:b expresion:c{:RESULT=a+" "+b+" "+c;:}
         |expresion:a AND expresion:c{:RESULT=a+" and "+c;:}
         |expresion:a OR expresion:c{:RESULT=a+" or "+c;:}
 ;

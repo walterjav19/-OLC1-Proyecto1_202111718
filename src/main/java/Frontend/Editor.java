@@ -497,14 +497,19 @@ public class Editor extends javax.swing.JFrame {
                                  main()
                               """;
                 
-                String instrucciones="";
                 
-                for(String trad:pars.Traducciones){
-                    instrucciones+="    "+trad+"\n";
+                
+                String Traduccion="";
+                for(String linea :pars.Traduccion.split("\n")){
+                    Traduccion+="    "+linea+"\n";
+                    
                 }
                 
                 
-                jTextArea2.setText(cabecera+instrucciones+footer);
+                
+                jTextArea2.setText(cabecera+Traduccion+footer);
+                
+               
                 
                 
                 JOptionPane.showMessageDialog(null, "Archivo Analizado","AVISO", JOptionPane.INFORMATION_MESSAGE);

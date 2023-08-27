@@ -29,7 +29,11 @@ parser code
     public String Titulo_Pie;
     public List<String> EjeX_Pie= new ArrayList<String>();
     public List<Double> Valores_Pie= new ArrayList<Double>();
-    public List<String> Traducciones= new ArrayList<String>();
+    
+
+    public String Traduccion="";
+    
+
 :} 
 
 terminal String BRAIZQ,BRADER,CADENA,DECIMAL,VOID,MAIN,PARDER,PARIZQ,IDENT,IGUAL,DEFGLOB,GRAFBAR,GRAFPI,PTOCOMA,INT,DOUBLE,STRING,ENTERO;
@@ -37,15 +41,16 @@ terminal String NEWVAL,DOLAR,COMA,LLAIZQ,LLADER,TITULO,EJEX,VALORES,TITULOY,TITU
 terminal String MAS,MENOS,POR,DIVIDIDO;
 terminal String MAYOR,MENOR,MAYORIGUAL,MENORIGUAL,EQUALS,NOTEQUALS,NOT,AND,OR;
 terminal String UMENOS;
-terminal String CHAR,PCHAR,TF,BOOL,IF,ELSE;
+terminal String CHAR,PCHAR,TRUE,FALSE,BOOL,IF,ELSE;
 
 
-non terminal inicio,instrucciones,sentencias,globales,barras,pie,listainstrucciones,listaglobales,variablesglobales;
+non terminal inicio,instrucciones,globales,barras,pie,listainstrucciones,listaglobales,variablesglobales;
 non terminal String expresion;
 non terminal variablesjson,listabarras,instruccionesbarras,listastring,arreglostring,listadouble,arreglodouble;
 nonterminal  listapie,instruccionespie,listastringpie,arreglostringpie,listadoublepie,arreglodoublepie;
 non terminal String aritmetica,logica,symbols,uno;
-non terminal String declaracion,print,if,listaif,ifanidado;
+non terminal String declaracion,print,if,sentencias;
+non terminal String listasentencias;
 
 precedence left MAYOR,MENOR,MAYORIGUAL,MENORIGUAL,EQUALS,NOTEQUALS;
 precedence left AND, OR;
@@ -65,30 +70,29 @@ listainstrucciones::= listainstrucciones instrucciones
                       |instrucciones
 ;
 
-instrucciones::= sentencias
+instrucciones::= sentencias:a {:System.out.println(a);Traduccion+=a+"\n";:}
                 |globales
                 |barras
                 |pie
 ;
 
-sentencias::=declaracion:a{:Traducciones.add(a);:}
-            | print:a{:Traducciones.add(a);:}
-            | if{::}
+sentencias::=declaracion:a{:RESULT=a;:}
+            | print:a{:RESULT=a;:}
+            | if:a{:RESULT=a;:}
 ;
 
 
 
-if::=IF PARIZQ PARDER BRAIZQ BRADER listaif{:System.out.println("if");:}
+if::=IF PARIZQ expresion:a PARDER BRAIZQ listasentencias:s BRADER{:RESULT="if "+a+":\n"+"    "+s;:}
+     |ELSE IF PARIZQ expresion:a PARDER  BRAIZQ listasentencias:s BRADER{:RESULT="elif "+a+":\n"+"    "+s;:}
+     |ELSE BRAIZQ listasentencias:s BRADER{:RESULT="else:\n"+"    "+s;:}
 ;
 
 
-listaif::= listaif ifanidado
-          |ifanidado
+listasentencias::=listasentencias:b sentencias:a {:RESULT=b+"\n    "+a;:}
+                 | sentencias:a{:RESULT="    "+a;:}
 ;
 
-ifanidado::=ELSE IF PARIZQ PARDER BRAIZQ BRADER{:System.out.println("else if");:}
-            |ELSE BRAIZQ BRADER{:System.out.println("else");:}
-;
 
 
 
@@ -112,7 +116,8 @@ expresion ::=symbols:a{:RESULT=a;:}
 symbols::=IDENT:a{:RESULT=a;:}
          |CADENA:a{:RESULT=a;:}
          |CHAR:a{:RESULT=a;:}
-         |TF:a {:RESULT=a;:}
+         |TRUE:a {:RESULT="True";:}
+         |FALSE:a {:RESULT="False";:}
 ;
 
 aritmetica ::= expresion:a MAS expresion:b {:RESULT=a+"+"+b;:}	

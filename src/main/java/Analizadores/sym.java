@@ -27,9 +27,9 @@ public class sym {
   public static final int IGUAL = 11;
   public static final int DIVIDIDO = 36;
   public static final int OR = 45;
-  public static final int BOOL = 50;
+  public static final int BOOL = 51;
   public static final int TITULO = 25;
-  public static final int IF = 51;
+  public static final int IF = 52;
   public static final int UMENOS = 46;
   public static final int MAIN = 7;
   public static final int LLAIZQ = 23;
@@ -40,6 +40,7 @@ public class sym {
   public static final int DECIMAL = 5;
   public static final int VALORES = 27;
   public static final int DEFGLOB = 12;
+  public static final int TRUE = 49;
   public static final int error = 1;
   public static final int COMA = 22;
   public static final int CADENA = 4;
@@ -49,14 +50,14 @@ public class sym {
   public static final int IDENT = 10;
   public static final int VOID = 6;
   public static final int MAYOR = 37;
-  public static final int ELSE = 52;
+  public static final int ELSE = 53;
   public static final int GRAFBAR = 13;
   public static final int PUNTO = 32;
   public static final int NOTEQUALS = 42;
-  public static final int TF = 49;
   public static final int STRING = 18;
   public static final int LLADER = 24;
   public static final int GRAFPI = 14;
+  public static final int FALSE = 50;
   public static final int PARDER = 8;
   public static final int DOLAR = 21;
   public static final int CONSOLE = 30;
@@ -111,7 +112,8 @@ public class sym {
   "UMENOS",
   "CHAR",
   "PCHAR",
-  "TF",
+  "TRUE",
+  "FALSE",
   "BOOL",
   "IF",
   "ELSE"

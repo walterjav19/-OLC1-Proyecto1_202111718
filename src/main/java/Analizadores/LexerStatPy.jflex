@@ -38,10 +38,15 @@ D=[0-9]
 L=[a-zA-Z_ñÑ]
 entero=[0-9]+
 CHAR = ([\']([^\t\'\"\n]|(\\\")|(\\n)|(\\\')|(\\t))?[\'])|(['][\$][{](6[5-9]|[7-8][0-9]|90|9[7-9]|10[0-9]|11[0-9]|12[0-2])[}]['])
-BOOLEAN = True|False
 
 
 %%
+
+"True" {T_SIMBOLOS.add(new Symbol(sym.TRUE,yyline,yychar, yytext()));
+       return new Symbol(sym.TRUE,yyline,yychar, yytext());}
+
+"False" {T_SIMBOLOS.add(new Symbol(sym.FALSE,yyline,yychar, yytext()));
+       return new Symbol(sym.FALSE,yyline,yychar, yytext());}
 
 "if" {T_SIMBOLOS.add(new Symbol(sym.IF,yyline,yychar, yytext()));
        return new Symbol(sym.IF,yyline,yychar, yytext());}
@@ -197,8 +202,7 @@ BOOLEAN = True|False
 {DD} {T_SIMBOLOS.add(new Symbol(sym.DECIMAL,yyline,yychar, yytext()));
       return new Symbol(sym.DECIMAL,yyline,yychar, yytext());}
 
-{BOOLEAN} {T_SIMBOLOS.add(new Symbol(sym.TF,yyline,yychar, yytext()));
-      return new Symbol(sym.TF,yyline,yychar, yytext());}
+
 
 {comentariosimple} {/*Ignorar Espacios Comentarios*/}
 {BLANCOS} {/*Ignorar Espacios en Blanco*/}

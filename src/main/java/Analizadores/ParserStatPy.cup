@@ -120,7 +120,18 @@ RESULT="for "+a+" in range("+b+","+sup+"):\n"+ide;
 :}
 ;
 
-dowhile::=DO BRAIZQ BRADER WHILE PARIZQ PARDER PTOCOMA
+dowhile::=DO BRAIZQ listasentencias:s BRADER WHILE PARIZQ IDENT:a MENOR expresion:d PARDER PTOCOMA
+{:
+String ide=Variable.formatCodeWithIndentation(s);
+RESULT="While True:\n"+ide+"\n    if "+a+" == "+d+":\n        break";
+:}
+|DO BRAIZQ listasentencias:s BRADER WHILE PARIZQ IDENT:a MENORIGUAL expresion:d PARDER PTOCOMA
+{:
+String ide=Variable.formatCodeWithIndentation(s);
+int sup = Integer.parseInt(d);
+sup++;
+RESULT="While True:\n"+ide+"\n    if "+a+" == "+sup+":\n        break";
+:}
 ;
 
 listasentencias::=listasentencias:b sentencias:a {:RESULT=b+"\n"+a;:}
@@ -135,7 +146,7 @@ declaracion ::=INT IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
             |STRING IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
             |PCHAR IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
             |BOOL IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
-            |IDENT:a MAS:b MAS {:RESULT=a+" "+b+b;:}
+            |IDENT:a MAS:b MAS PTOCOMA{:RESULT=a+"="+a+"+1";:}
 ;
 
 print::=CONSOLE:a PUNTO:b WRITE:c PARIZQ:d expresion:exp PARDER:e PTOCOMA:f{:

@@ -685,7 +685,7 @@ class CUP$SintacticoStatPy$actions {
 		int sleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
 		String s = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
-		RESULT="if "+a+":\n"+"    "+s;
+		String ide=Variable.formatCodeWithIndentation(s);RESULT="if "+a+":\n"+ide;
               CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("if",28, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-6)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatPy$result;
@@ -700,7 +700,7 @@ class CUP$SintacticoStatPy$actions {
 		int sleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
 		String s = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
-		RESULT="elif "+a+":\n"+"    "+s;
+		String ide=Variable.formatCodeWithIndentation(s);RESULT="elif "+a+":\n"+ide;
               CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("if",28, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-7)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatPy$result;
@@ -712,7 +712,7 @@ class CUP$SintacticoStatPy$actions {
 		int sleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).right;
 		String s = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)).value;
-		RESULT="else:\n"+"    "+s;
+		String ide=Variable.formatCodeWithIndentation(s);RESULT="else:\n"+ide;
               CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("if",28, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-3)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatPy$result;
@@ -727,7 +727,7 @@ class CUP$SintacticoStatPy$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
-		RESULT=b+"\n    "+a;
+		RESULT=b+"\n"+a;
               CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("listasentencias",30, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-1)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatPy$result;
@@ -739,7 +739,7 @@ class CUP$SintacticoStatPy$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
-		RESULT="    "+a;
+		RESULT=a;
               CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("listasentencias",30, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatPy$result;

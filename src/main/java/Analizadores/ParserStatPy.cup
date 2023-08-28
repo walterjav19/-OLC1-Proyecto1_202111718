@@ -83,14 +83,14 @@ sentencias::=declaracion:a{:RESULT=a;:}
 
 
 
-if::=IF PARIZQ expresion:a PARDER BRAIZQ listasentencias:s BRADER{:RESULT="if "+a+":\n"+"    "+s;:}
-     |ELSE IF PARIZQ expresion:a PARDER  BRAIZQ listasentencias:s BRADER{:RESULT="elif "+a+":\n"+"    "+s;:}
-     |ELSE BRAIZQ listasentencias:s BRADER{:RESULT="else:\n"+"    "+s;:}
+if::=IF PARIZQ expresion:a PARDER BRAIZQ listasentencias:s BRADER{:String ide=Variable.formatCodeWithIndentation(s);RESULT="if "+a+":\n"+ide;:}
+     |ELSE IF PARIZQ expresion:a PARDER  BRAIZQ listasentencias:s BRADER{:String ide=Variable.formatCodeWithIndentation(s);RESULT="elif "+a+":\n"+ide;:}
+     |ELSE BRAIZQ listasentencias:s BRADER{:String ide=Variable.formatCodeWithIndentation(s);RESULT="else:\n"+ide;:}
 ;
 
 
-listasentencias::=listasentencias:b sentencias:a {:RESULT=b+"\n    "+a;:}
-                 | sentencias:a{:RESULT="    "+a;:}
+listasentencias::=listasentencias:b sentencias:a {:RESULT=b+"\n"+a;:}
+                 | sentencias:a{:RESULT=a;:}
 ;
 
 

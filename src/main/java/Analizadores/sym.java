@@ -17,6 +17,7 @@ public class sym {
   public static final int DOUBLE = 17;
   public static final int PCHAR = 48;
   public static final int INT = 16;
+  public static final int FOR = 54;
   public static final int TITULOY = 28;
   public static final int WRITE = 31;
   public static final int TITULOX = 29;
@@ -46,6 +47,7 @@ public class sym {
   public static final int CADENA = 4;
   public static final int MENOS = 34;
   public static final int MENOR = 38;
+  public static final int BREAK = 56;
   public static final int BRAIZQ = 2;
   public static final int IDENT = 10;
   public static final int VOID = 6;
@@ -53,6 +55,7 @@ public class sym {
   public static final int ELSE = 53;
   public static final int GRAFBAR = 13;
   public static final int PUNTO = 32;
+  public static final int WHILE = 55;
   public static final int NOTEQUALS = 42;
   public static final int STRING = 18;
   public static final int LLADER = 24;
@@ -60,6 +63,7 @@ public class sym {
   public static final int FALSE = 50;
   public static final int PARDER = 8;
   public static final int DOLAR = 21;
+  public static final int DO = 57;
   public static final int CONSOLE = 30;
   public static final int MAS = 33;
   public static final String[] terminalNames = new String[] {
@@ -116,7 +120,11 @@ public class sym {
   "FALSE",
   "BOOL",
   "IF",
-  "ELSE"
+  "ELSE",
+  "FOR",
+  "WHILE",
+  "BREAK",
+  "DO"
   };
 }
 

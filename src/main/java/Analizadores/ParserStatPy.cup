@@ -41,7 +41,7 @@ terminal String NEWVAL,DOLAR,COMA,LLAIZQ,LLADER,TITULO,EJEX,VALORES,TITULOY,TITU
 terminal String MAS,MENOS,POR,DIVIDIDO;
 terminal String MAYOR,MENOR,MAYORIGUAL,MENORIGUAL,EQUALS,NOTEQUALS,NOT,AND,OR;
 terminal String UMENOS;
-terminal String CHAR,PCHAR,TRUE,FALSE,BOOL,IF,ELSE;
+terminal String CHAR,PCHAR,TRUE,FALSE,BOOL,IF,ELSE,FOR,WHILE,BREAK,DO;
 
 
 non terminal inicio,instrucciones,globales,barras,pie,listainstrucciones,listaglobales,variablesglobales;
@@ -49,7 +49,7 @@ non terminal String expresion;
 non terminal variablesjson,listabarras,instruccionesbarras,listastring,arreglostring,listadouble,arreglodouble;
 nonterminal  listapie,instruccionespie,listastringpie,arreglostringpie,listadoublepie,arreglodoublepie;
 non terminal String aritmetica,logica,symbols,uno;
-non terminal String declaracion,print,if,sentencias;
+non terminal String declaracion,print,if,sentencias,while,for,dowhile;
 non terminal String listasentencias;
 
 precedence left MAYOR,MENOR,MAYORIGUAL,MENORIGUAL,EQUALS,NOTEQUALS;
@@ -79,6 +79,9 @@ instrucciones::= sentencias:a {:System.out.println(a);Traduccion+=a+"\n";:}
 sentencias::=declaracion:a{:RESULT=a;:}
             | print:a{:RESULT=a;:}
             | if:a{:RESULT=a;:}
+            | while:a{:RESULT=a;:}
+            | for:a{:RESULT=a;:}
+            | dowhile:a{:RESULT=a;:}
 ;
 
 
@@ -88,6 +91,37 @@ if::=IF PARIZQ expresion:a PARDER BRAIZQ listasentencias:s BRADER{:String ide=Va
      |ELSE BRAIZQ listasentencias:s BRADER{:String ide=Variable.formatCodeWithIndentation(s);RESULT="else:\n"+ide;:}
 ;
 
+while::=WHILE PARIZQ expresion:a PARDER BRAIZQ listasentencias:s BRADER{:String ide=Variable.formatCodeWithIndentation(s);RESULT="while "+a+":\n"+ide;:}
+;
+
+for::= FOR PARIZQ INT IDENT:a IGUAL expresion:b  PTOCOMA IDENT MENOR expresion:d PTOCOMA IDENT MAS MAS PARDER BRAIZQ listasentencias:s BRADER 
+{:
+String ide=Variable.formatCodeWithIndentation(s);
+RESULT="for "+a+" in range("+b+","+d+"):\n"+ide;
+:}
+|FOR PARIZQ INT IDENT:a IGUAL expresion:b  PTOCOMA IDENT MENORIGUAL expresion:d PTOCOMA IDENT MAS MAS PARDER BRAIZQ listasentencias:s BRADER 
+{:
+String ide=Variable.formatCodeWithIndentation(s);
+int sup = Integer.parseInt(d);
+sup++;
+RESULT="for "+a+" in range("+b+","+sup+"):\n"+ide;
+:}
+|FOR PARIZQ IDENT:a IGUAL expresion:b  PTOCOMA IDENT MENOR expresion:d PTOCOMA IDENT MAS MAS PARDER BRAIZQ listasentencias:s BRADER 
+{:
+String ide=Variable.formatCodeWithIndentation(s);
+RESULT="for "+a+" in range("+b+","+d+"):\n"+ide;
+:}
+|FOR PARIZQ IDENT:a IGUAL expresion:b  PTOCOMA IDENT MENORIGUAL expresion:d PTOCOMA IDENT MAS MAS PARDER BRAIZQ listasentencias:s BRADER 
+{:
+String ide=Variable.formatCodeWithIndentation(s);
+int sup = Integer.parseInt(d);
+sup++;
+RESULT="for "+a+" in range("+b+","+sup+"):\n"+ide;
+:}
+;
+
+dowhile::=DO BRAIZQ BRADER WHILE PARIZQ PARDER PTOCOMA
+;
 
 listasentencias::=listasentencias:b sentencias:a {:RESULT=b+"\n"+a;:}
                  | sentencias:a{:RESULT=a;:}
@@ -101,9 +135,17 @@ declaracion ::=INT IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
             |STRING IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
             |PCHAR IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
             |BOOL IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
+            |IDENT:a MAS:b MAS {:RESULT=a+" "+b+b;:}
 ;
 
-print::=CONSOLE:a PUNTO:b WRITE:c PARIZQ:d expresion:exp PARDER:e PTOCOMA:f{:RESULT="print("+exp+")";:}
+print::=CONSOLE:a PUNTO:b WRITE:c PARIZQ:d expresion:exp PARDER:e PTOCOMA:f{:
+if(exp.contains("\"")){
+if(exp.contains("+")){
+exp=exp.replace("+",",");
+}
+}
+RESULT="print("+exp+")";
+:}
 ;
 
 expresion ::=symbols:a{:RESULT=a;:}

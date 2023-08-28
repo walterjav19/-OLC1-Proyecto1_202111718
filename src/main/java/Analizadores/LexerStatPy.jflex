@@ -42,6 +42,20 @@ CHAR = ([\']([^\t\'\"\n]|(\\\")|(\\n)|(\\\')|(\\t))?[\'])|(['][\$][{](6[5-9]|[7-
 
 %%
 
+"for" {T_SIMBOLOS.add(new Symbol(sym.FOR,yyline,yychar, yytext()));
+       return new Symbol(sym.FOR,yyline,yychar, yytext());}
+
+"do" {T_SIMBOLOS.add(new Symbol(sym.DO,yyline,yychar, yytext()));
+       return new Symbol(sym.DO,yyline,yychar, yytext());}
+
+"while" {T_SIMBOLOS.add(new Symbol(sym.WHILE,yyline,yychar, yytext()));
+       return new Symbol(sym.WHILE,yyline,yychar, yytext());}
+
+"break" {T_SIMBOLOS.add(new Symbol(sym.BREAK,yyline,yychar, yytext()));
+       return new Symbol(sym.BREAK,yyline,yychar, yytext());}
+
+
+
 "True" {T_SIMBOLOS.add(new Symbol(sym.TRUE,yyline,yychar, yytext()));
        return new Symbol(sym.TRUE,yyline,yychar, yytext());}
 

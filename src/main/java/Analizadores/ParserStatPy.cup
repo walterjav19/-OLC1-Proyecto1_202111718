@@ -136,7 +136,7 @@ listacasos::=listacasos:a caso:b {:RESULT=a+"\n"+b;:}
             |caso:a {:RESULT=a;:} 
 ;
 
-caso::=CASE expresion:e DOSPTO listasentencias:s {:String ide=Variable.formatcase(s);RESULT="        case "+e+":\n"+ide+",";:}
+caso::=CASE expresion:e DOSPTO listasentencias:s {:String ide=Variable.formatcase(s);RESULT="        "+e+":\n"+ide+",";:}
       |DEFAULT DOSPTO listasentencias:s {:String ide=Variable.formatcase(s);RESULT="        \"default\":\n"+ide;:}
 ;
 

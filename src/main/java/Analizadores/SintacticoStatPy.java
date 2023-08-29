@@ -1202,7 +1202,7 @@ RESULT="While True:\n"+ide+"\n    if "+d+":\n        break";
 		int sleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
 		String s = (String)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
-		String ide=Variable.formatcase(s);RESULT="        case "+e+":\n"+ide+",";
+		String ide=Variable.formatcase(s);RESULT="        "+e+":\n"+ide+",";
               CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("caso",36, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.elementAt(CUP$SintacticoStatPy$top-3)), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
             }
           return CUP$SintacticoStatPy$result;

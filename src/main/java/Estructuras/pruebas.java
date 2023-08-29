@@ -15,7 +15,7 @@ public class pruebas {
         do {
             System.out.println("el valor es "+a);
             a++;
-        } while(a < 6);
+        } while(a < 5);
         
         
     }

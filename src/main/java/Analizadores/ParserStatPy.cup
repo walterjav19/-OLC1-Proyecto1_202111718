@@ -32,16 +32,15 @@ parser code
     
 
     public String Traduccion="";
-    
 
 :} 
 
 terminal String BRAIZQ,BRADER,CADENA,DECIMAL,VOID,MAIN,PARDER,PARIZQ,IDENT,IGUAL,DEFGLOB,GRAFBAR,GRAFPI,PTOCOMA,INT,DOUBLE,STRING,ENTERO;
-terminal String NEWVAL,DOLAR,COMA,LLAIZQ,LLADER,TITULO,EJEX,VALORES,TITULOY,TITULOX,CONSOLE,WRITE,PUNTO;
+terminal String NEWVAL,DOLAR,COMA,LLAIZQ,LLADER,TITULO,EJEX,VALORES,TITULOY,TITULOX,CONSOLE,WRITE,PUNTO,DOSPTO;
 terminal String MAS,MENOS,POR,DIVIDIDO;
 terminal String MAYOR,MENOR,MAYORIGUAL,MENORIGUAL,EQUALS,NOTEQUALS,NOT,AND,OR;
 terminal String UMENOS;
-terminal String CHAR,PCHAR,TRUE,FALSE,BOOL,IF,ELSE,FOR,WHILE,BREAK,DO;
+terminal String CHAR,PCHAR,TRUE,FALSE,BOOL,IF,ELSE,FOR,WHILE,BREAK,DO,CASE,SWITCH,DEFAULT;
 
 
 non terminal inicio,instrucciones,globales,barras,pie,listainstrucciones,listaglobales,variablesglobales;
@@ -49,8 +48,8 @@ non terminal String expresion;
 non terminal variablesjson,listabarras,instruccionesbarras,listastring,arreglostring,listadouble,arreglodouble;
 nonterminal  listapie,instruccionespie,listastringpie,arreglostringpie,listadoublepie,arreglodoublepie;
 non terminal String aritmetica,logica,symbols,uno;
-non terminal String declaracion,print,if,sentencias,while,for,dowhile;
-non terminal String listasentencias;
+non terminal String declaracion,print,if,sentencias,while,for,dowhile,switch;
+non terminal String listasentencias,listacasos,caso;
 
 precedence left MAYOR,MENOR,MAYORIGUAL,MENORIGUAL,EQUALS,NOTEQUALS;
 precedence left AND, OR;
@@ -82,6 +81,7 @@ sentencias::=declaracion:a{:RESULT=a;:}
             | while:a{:RESULT=a;:}
             | for:a{:RESULT=a;:}
             | dowhile:a{:RESULT=a;:}
+            | switch:a{:RESULT=a;:}
 ;
 
 
@@ -93,6 +93,7 @@ if::=IF PARIZQ expresion:a PARDER BRAIZQ listasentencias:s BRADER{:String ide=Va
 
 while::=WHILE PARIZQ expresion:a PARDER BRAIZQ listasentencias:s BRADER{:String ide=Variable.formatCodeWithIndentation(s);RESULT="while "+a+":\n"+ide;:}
 ;
+
 
 for::= FOR PARIZQ INT IDENT:a IGUAL expresion:b  PTOCOMA IDENT MENOR expresion:d PTOCOMA IDENT MAS MAS PARDER BRAIZQ listasentencias:s BRADER 
 {:
@@ -120,18 +121,23 @@ RESULT="for "+a+" in range("+b+","+sup+"):\n"+ide;
 :}
 ;
 
-dowhile::=DO BRAIZQ listasentencias:s BRADER WHILE PARIZQ IDENT:a MENOR expresion:d PARDER PTOCOMA
+dowhile::=DO BRAIZQ listasentencias:s BRADER WHILE PARIZQ expresion:d PARDER PTOCOMA
 {:
 String ide=Variable.formatCodeWithIndentation(s);
-RESULT="While True:\n"+ide+"\n    if "+a+" == "+d+":\n        break";
+RESULT="While True:\n"+ide+"\n    if "+d+":\n        break";
 :}
-|DO BRAIZQ listasentencias:s BRADER WHILE PARIZQ IDENT:a MENORIGUAL expresion:d PARDER PTOCOMA
-{:
-String ide=Variable.formatCodeWithIndentation(s);
-int sup = Integer.parseInt(d);
-sup++;
-RESULT="While True:\n"+ide+"\n    if "+a+" == "+sup+":\n        break";
-:}
+;
+
+
+switch::= SWITCH PARIZQ IDENT PARDER BRAIZQ listacasos:l BRADER{:String ide=Variable.formatCodeWithIndentation(l);RESULT="def switch(case):\n    switcher={\n"+ide+"\n}";:}
+;
+
+listacasos::=listacasos:a caso:b {:RESULT=a+"\n"+b;:}
+            |caso:a {:RESULT=a;:} 
+;
+
+caso::=CASE expresion:e DOSPTO listasentencias:s {:String ide=Variable.formatcase(s);RESULT="        case "+e+":\n"+ide+",";:}
+      |DEFAULT DOSPTO listasentencias:s {:String ide=Variable.formatcase(s);RESULT="        \"default\":\n"+ide;:}
 ;
 
 listasentencias::=listasentencias:b sentencias:a {:RESULT=b+"\n"+a;:}
@@ -146,7 +152,9 @@ declaracion ::=INT IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
             |STRING IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
             |PCHAR IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
             |BOOL IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
+            |IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
             |IDENT:a MAS:b MAS PTOCOMA{:RESULT=a+"="+a+"+1";:}
+            |BREAK PTOCOMA{:RESULT="break";:}
 ;
 
 print::=CONSOLE:a PUNTO:b WRITE:c PARIZQ:d expresion:exp PARDER:e PTOCOMA:f{:

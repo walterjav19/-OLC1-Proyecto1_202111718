@@ -35,7 +35,21 @@ public class Variable {
 }
     
 
-        
+public static String formatcase(String input) {
+    String[] lines = input.split("\n");
+    int totalLines = lines.length;
+    StringBuilder formattedCode = new StringBuilder();
+
+    for (int i = 0; i < totalLines; i++) {
+        formattedCode.append("            ").append(lines[i]);
+        if (i < totalLines - 1) {
+            formattedCode.append("\n");
+        }
+    }
+
+    return formattedCode.toString();
+}
+    
 
         
 

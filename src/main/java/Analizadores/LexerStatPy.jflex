@@ -54,7 +54,14 @@ CHAR = ([\']([^\t\'\"\n]|(\\\")|(\\n)|(\\\')|(\\t))?[\'])|(['][\$][{](6[5-9]|[7-
 "break" {T_SIMBOLOS.add(new Symbol(sym.BREAK,yyline,yychar, yytext()));
        return new Symbol(sym.BREAK,yyline,yychar, yytext());}
 
+"case" {T_SIMBOLOS.add(new Symbol(sym.CASE,yyline,yychar, yytext()));
+       return new Symbol(sym.CASE,yyline,yychar, yytext());}
 
+"switch" {T_SIMBOLOS.add(new Symbol(sym.SWITCH,yyline,yychar, yytext()));
+       return new Symbol(sym.SWITCH,yyline,yychar, yytext());}
+
+"default" {T_SIMBOLOS.add(new Symbol(sym.DEFAULT,yyline,yychar, yytext()));
+       return new Symbol(sym.DEFAULT,yyline,yychar, yytext());}
 
 "True" {T_SIMBOLOS.add(new Symbol(sym.TRUE,yyline,yychar, yytext()));
        return new Symbol(sym.TRUE,yyline,yychar, yytext());}
@@ -198,6 +205,9 @@ CHAR = ([\']([^\t\'\"\n]|(\\\")|(\\n)|(\\\')|(\\t))?[\'])|(['][\$][{](6[5-9]|[7-
 
 "." {T_SIMBOLOS.add(new Symbol(sym.PUNTO,yyline,yychar, yytext()));
      return new Symbol(sym.PUNTO,yyline,yychar, yytext());}
+
+":" {T_SIMBOLOS.add(new Symbol(sym.DOSPTO,yyline,yychar, yytext()));
+     return new Symbol(sym.DOSPTO,yyline,yychar, yytext());}
 
 \n {yychar=0;}
 

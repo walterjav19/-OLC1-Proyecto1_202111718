@@ -137,7 +137,7 @@ RESULT="While True:\n"+ide+"\n    if "+d+":\n        break";
 ;
 
 
-switch::= SWITCH PARIZQ IDENT PARDER BRAIZQ listacasos:l BRADER{:String ide=Variable.formatCodeWithIndentation(l);RESULT="def switch(case):\n    switcher={\n"+ide+"\n}";:}
+switch::= SWITCH PARIZQ expresion:ex PARDER BRAIZQ listacasos:l BRADER{:String ide=Variable.formatCodeWithIndentation(l);RESULT="def switch("+ex+"):\n    switcher={\n"+ide+"\n}";:}
 ;
 
 listacasos::=listacasos:a caso:b {:RESULT=a+"\n"+b;:}
@@ -238,18 +238,27 @@ barras::=VOID GRAFBAR PARIZQ PARDER BRAIZQ listabarras BRADER
 ;
 
 listabarras::=listabarras instruccionesbarras
-            | instruccionesbarras
+            | instruccionesbarras:a{RESULT=}
 ;
 
-instruccionesbarras::=STRING TITULO  IGUAL IDENT:a PTOCOMA{:Titulo_Barras=t_variables.get(a).toString();:}
-                     |STRING TITULO  IGUAL CADENA:a PTOCOMA{:Titulo_Barras=a.replace("\"","");:}
-                     |STRING TITULO  IGUAL variablesjson:a PTOCOMA{:Titulo_Barras=a.toString();:}
-                     |STRING TITULOX IGUAL IDENT:a PTOCOMA{:TituloEjeX_Barras=t_variables.get(a).toString();:}
-                     |STRING TITULOX IGUAL CADENA:a PTOCOMA{:TituloEjeX_Barras=a.replace("\"","");:}
-                     |STRING TITULOX IGUAL variablesjson:a PTOCOMA{:TituloEjeX_Barras=a.toString();:}
-                     |STRING TITULOY IGUAL IDENT:a PTOCOMA{:TituloEjeY_Barras=t_variables.get(a).toString();:}
-                     |STRING TITULOY IGUAL CADENA:a PTOCOMA{:TituloEjeY_Barras=a.replace("\"","");:}
-                     |STRING TITULOY IGUAL variablesjson:a PTOCOMA{:TituloEjeY_Barras=a.toString();:}
+instruccionesbarras::=STRING TITULO  IGUAL IDENT:a PTOCOMA{:Titulo_Barras=t_variables.get(a).toString();
+                      RESULT=t_variables.get(a).toString();:}
+                     |STRING TITULO  IGUAL CADENA:a PTOCOMA{:Titulo_Barras=a.replace("\"","");
+                      RESULT=a.replace("\"","");:}
+                     |STRING TITULO  IGUAL variablesjson:a PTOCOMA{:Titulo_Barras=a.toString();
+                      RESULT=a.toString();:}
+                     |STRING TITULOX IGUAL IDENT:a PTOCOMA{:TituloEjeX_Barras=t_variables.get(a).toString();
+                      RESULT=t_variables.get(a).toString();:}
+                     |STRING TITULOX IGUAL CADENA:a PTOCOMA{:TituloEjeX_Barras=a.replace("\"","");
+                      RESULT=a.replace("\"","");:}
+                     |STRING TITULOX IGUAL variablesjson:a PTOCOMA{:TituloEjeX_Barras=a.toString();
+                      RESULT=a.toString();:}
+                     |STRING TITULOY IGUAL IDENT:a PTOCOMA{:TituloEjeY_Barras=t_variables.get(a).toString();
+                      RESULT=t_variables.get(a).toString();:}
+                     |STRING TITULOY IGUAL CADENA:a PTOCOMA{:TituloEjeY_Barras=a.replace("\"","");
+                      RESULT=a.replace("\"","");:}
+                     |STRING TITULOY IGUAL variablesjson:a PTOCOMA{:TituloEjeY_Barras=a.toString();
+                      RESULT=a.toString();:}
                      |STRING LLAIZQ LLADER EJEX IGUAL BRAIZQ listastring BRADER PTOCOMA
                      |DOUBLE LLAIZQ LLADER VALORES IGUAL BRAIZQ listadouble BRADER PTOCOMA  
 ;

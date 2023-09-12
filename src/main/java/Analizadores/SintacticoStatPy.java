@@ -1944,6 +1944,9 @@ RESULT=var;
           case 76: // listabarras ::= instruccionesbarras 
             {
               Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$SintacticoStatPy$stack.peek()).value;
 
               CUP$SintacticoStatPy$result = parser.getSymbolFactory().newSymbol("listabarras",10, ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), ((java_cup.runtime.Symbol)CUP$SintacticoStatPy$stack.peek()), RESULT);
             }

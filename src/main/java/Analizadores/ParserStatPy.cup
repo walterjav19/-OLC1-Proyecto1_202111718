@@ -90,6 +90,13 @@ sentencias::=declaracion:a{:RESULT=a;:}
             | for:a{:RESULT=a;:}
             | dowhile:a{:RESULT=a;:}
             | switch:a{:RESULT=a;:}
+            | error declaracion
+            | error print
+            | error if
+            | error while
+            | error for
+            | error dowhile
+            | error switch
 ;
 
 
@@ -163,6 +170,7 @@ declaracion ::=INT IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
             |IDENT:b IGUAL:c expresion:exp PTOCOMA:d{:RESULT=b+c+exp;:}
             |IDENT:a MAS:b MAS PTOCOMA{:RESULT=a+"="+a+"+1";:}
             |BREAK PTOCOMA{:RESULT="break";:}
+            |error PTOCOMA
 ;
 
 print::=CONSOLE:a PUNTO:b WRITE:c PARIZQ:d expresion:exp PARDER:e PTOCOMA:f{:

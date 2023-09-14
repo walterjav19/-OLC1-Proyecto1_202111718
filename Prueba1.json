@@ -1,0 +1,18 @@
+
+//COmentario normal
+
+/*
+  MUltilinea
+*/
+{
+  "titulo":"Reporte de notas USAC",
+  "ejex1":"Estadistica",
+  "ejex2":"Matematica",
+  "ejex3":"Fisica",
+  "ejex4":"IPC 1",
+  "val1": 60.0,
+  "val2": 61.0,
+  "val3": 81.5,
+  "val4": 70.3
+}
+

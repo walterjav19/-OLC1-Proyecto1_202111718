@@ -1,0 +1,17 @@
+//COmentario normal
+
+/*
+  MUltilinea
+*/
+{
+  "titulo":"Reporte de notas UMG",
+  "ejex1":"Analisis",
+  "ejex2":"Matematica Basica 2", // un comentario aquí
+  "ejex3":"Fisica 4",
+  "ejex4":"ORGA 1",
+  "val1": 70.0,
+  "val2": 91.12,
+  "val3": 41.5,
+  "val4": 25.3
+}
+
